@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>Bitácora virtual</title>
+        <link rel="stylesheet" href="../css/formatoPrincipal.css">
+        <script src="../javaScript/main.js"></script>
+    </head>
+
+    <body>
+        <div id="fondo">
+            <div id="tituloPagina">
+                <p>BITÁCORA DE LABORATORIO</p>
+            </div>
+            <!-- Contenido menú principal -->
+            <div id="contenidoPrincipal">
+                <!-- Botones -->
+                <div class="botonesRegistros">
+                    <a href="../html/crearRegistro.html"><button class="btn-registros" id="crearR">Crear registro</button></a>
+                    <button class="btn-registros" id="modificarR">Modificar registro</button>
+                    <button class="btn-registros" id="visualizarR">Visualizar registro</button>
+                    <button class="btn-registros" id="eliminarR">Eliminar registro</button>
+                </div>
+                <!-- Búsqueda y filtrado -->
+                <div class="busqFiltr">
+                    <!-- Buscar -->
+                    <div class="buscar">
+                        <p id="buscar">Buscar</p><hr>
+                        <input type="search" placeholder="Ingrese búsqueda" id="ingresarTexto">
+                        <img id="lupa" src="../imagenes/png-transparent-magnifying-glass-magnification-magnifying-glass-glass-logo-light.png">
+                    </div>
+                    <!-- Filtrar por: -->
+                    <div class="filtrar">
+                        <img id="filtro" src="../imagenes/fitro.png">
+                        <button id="filtrarPor">Filtrar por:</button>
+                    </div>
+                    <!-- Eliminar filtros -->
+                    <div class="eliminarFiltro">
+                        <p id="eliminarFiltro">Eliminar filtros</p>
+                    </div>
+                </div>
+                <!-- Contenido tabla -->
+                <div id="estrTabla">
+                    <table class="tabla">
+                        <tr>
+                            <th><div class="encabezado" id="seleccionar">Seleccionar<br><img id="clic" src="../imagenes/clic.png"></div></th>
+                            <th><p class="encabezado">Nombre de usuario</p></th>
+                            <th><p class="encabezado">Número de solicitud</p></th>
+                            <th><p class="encabezado">Fecha</p></th>
+                            <th><p class="encabezado">Clave de muestra</p></th>
+                            <th><p class="encabezado">Fuentes empleadas</p></th>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><center id="sinRegistro">Aún no hay registros, cree uno para empezar o importe datos de alguna ruta.</center></th>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Texto y botones de importar y exportar -->
+                <div class="txtBtn">
+                    <p class="fin" id="info">** Para ver los detalles de algún registro, seleccione uno de ellos y dé clic en "Visualizar registro"</p>
+                    <button class="fin">Importar datos</button>
+                    <button class="fin">Exportar datos</button>
+                </div>
+            </div>
+            <footer class="piePagina">
+                <div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
