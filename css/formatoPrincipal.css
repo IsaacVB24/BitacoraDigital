@@ -210,3 +210,18 @@ button.fin{
     background-color: rgb(246, 232, 153);
     font-family: Lato, Helvetica, sans-serif;
 }
+
+#contPie{
+    display: flex;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 15px;
+}
+#infoPie{
+    margin-left: 1%;
+}
+#version{
+    text-align: right;
+    margin-left: auto;
+    margin-right: 1%;
+}
