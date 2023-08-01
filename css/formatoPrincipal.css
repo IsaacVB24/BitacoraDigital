@@ -23,6 +23,21 @@ a{
 a:hover{
     cursor: pointer;
 }
+input[type=text]{
+    cursor: text;
+    padding: 7px 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+input[type=text]:focus{
+    background-color: rgb(246, 232, 153);
+}
+input[type=submit]{
+    cursor: pointer;
+}
+button{
+    cursor: pointer;
+}
 
 #fondo{
     background-color: RGB(0,31,63);
@@ -215,13 +230,12 @@ button.fin{
     display: flex;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 #infoPie{
     margin-left: 1%;
 }
 #version{
-    text-align: right;
     margin-left: auto;
     margin-right: 1%;
 }

@@ -1,0 +1,57 @@
+*{
+    /*
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+    */
+    font-family: 'Montserrat', sans-serif;
+}
+#contenidoPrincipal{
+    padding: 20px;
+}
+
+.volver, #imgVolver, #volver{
+    cursor: pointer;
+}
+.volver{
+    display: flex;
+    background-color: white;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 15px;
+}
+#imgVolver{
+    margin-right: 5px;
+    height: 25px;
+}
+#volver{
+    font-weight: 900;
+    margin-top: 7px;
+    font-size: small;
+}
+
+#tablaRegistroNuevo{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+td{
+    border-collapse: collapse;
+    border: 0px;
+}
+.seccionTabla{
+    padding: 10px;
+}
+#btn-crearR{
+    float: right;
+    margin-right: 10%;
+}
+#observaciones{
+    width: 100%;
+    resize: none;
+    padding: 8 7;
+    cursor: text;
+}
+#observaciones:focus{
+    background-color: rgb(246, 232, 153);
+}
