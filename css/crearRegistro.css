@@ -52,7 +52,7 @@ td{
     padding: 8 7;
     cursor: text;
     border: 1px solid black;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 #observaciones:focus{
     background-color: rgb(246, 232, 153);
