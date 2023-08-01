@@ -7,7 +7,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 #contenidoPrincipal{
-    padding: 20px;
+    padding: 30px;
 }
 
 .volver, #imgVolver, #volver{
@@ -51,6 +51,8 @@ td{
     resize: none;
     padding: 8 7;
     cursor: text;
+    border: 1px solid black;
+    border-radius: 15px;
 }
 #observaciones:focus{
     background-color: rgb(246, 232, 153);
