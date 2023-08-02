@@ -1,0 +1,23 @@
+.input:hover, textarea:hover{
+    cursor: default;
+}
+.input, #observaciones{
+    border-style: dashed;
+}
+
+.visualizarR{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10 50 10 50;
+    font-family: Lato, Helvetica, sans-serif;
+    border-radius: 20px;
+    background-color: rgb(100, 199, 160);
+}
+#eliminarR{
+    background-color: rgb(150, 20, 20);
+    color: white;
+}
+#btns-visualizar{
+    float: right;
+    margin-right: 10%;
+}

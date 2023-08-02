@@ -46,7 +46,7 @@ td{
     float: right;
     margin-right: 10%;
 }
-#observaciones{
+.observaciones{
     width: 100%;
     resize: none;
     padding: 8 7;
@@ -54,6 +54,6 @@ td{
     border: 1px solid black;
     border-radius: 10px;
 }
-#observaciones:focus{
+.observaciones:focus{
     background-color: rgb(246, 232, 153);
 }
