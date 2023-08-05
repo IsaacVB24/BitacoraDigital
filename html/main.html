@@ -2,10 +2,12 @@
     <head>
         <title>Bitácora virtual</title>
         <link rel="stylesheet" href="../css/formatoPrincipal.css">
+        <link rel="stylesheet" href="../css/eliminarRegistro.css">
         <script type="text/javascript" src="../javaScript/version.js"></script>
+        <script type="text/javascript" src="../javaScript/eliminarRegistro.js"></script>
     </head>
 
-    <body onload="version()">
+    <body onload="version(), eliminar()">
         <div id="fondo">
             <div id="tituloPagina">
                 <p>BITÁCORA DE LABORATORIO (Quitar vínculos de botones: Modificar, Visualizar y Eliminar Registro)</p>
@@ -17,7 +19,7 @@
                     <a href="../html/crearRegistro.html"><button class="btn-registros" id="crearR">Crear registro</button></a>
                     <a href="../html/modificarRegistro.html"><button class="btn-registros" id="modificarR">Modificar registro</button></a>
                     <a href="../html/visualizarRegistro.html"><button class="btn-registros" id="visualizarR">Visualizar registro</button></a>
-                    <button class="btn-registros" id="eliminarR">Eliminar registro</button>
+                    <button class="btn-registros" id="eliminarR" onclick="accionEliminar()">Eliminar registro</button>
                 </div>
                 <!-- Búsqueda y filtrado -->
                 <div class="busqFiltr">
@@ -59,6 +61,8 @@
                     <button class="fin">Importar datos</button>
                     <button class="fin">Exportar datos</button>
                 </div>
+                
+                <div id="emergente-eliminarR"></div>
             </div>
             <footer class="piePagina">
                 <div id="contPie">
