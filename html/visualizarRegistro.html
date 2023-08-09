@@ -5,12 +5,14 @@
         <link rel="stylesheet" href="../css/crearRegistro.css">
         <link rel="stylesheet" href="../css/modificarRegistro.css">
         <link rel="stylesheet" href="../css/visualizarRegistro.css">
+        <link rel="stylesheet" href="../css/eliminarRegistro.css">
         <script type="text/javascript" src="../javaScript/version.js"></script>
+        <script type="text/javascript" src="../javaScript/eliminarRegistro.js"></script>
         <script type="text/javaScript" src="../javaScript/modificarRegistros.js"></script>
         <script type="text/javaScript" src="../javaScript/visualizarRegistro.js"></script>
     </head>
 
-    <body onload="version(), observaciones(), visualizar()">
+    <body onload="version(), observaciones(), visualizar(), eliminar()">
         <div id="fondo">
             <div id="tituloPagina">
                 <p>VISUALIZAR REGISTRO</p>
@@ -66,8 +68,8 @@
                     <tr>
                         <td>
                             <div class="seccionTabla">
-                                <p>Tiempo de vida de filamentos de rayos X (SFTL):</p>
-                                <input class="input" id="sftl" type="text" placeholder="Ingrese SFTL en minutos" value="SFTL en minutos registrado">
+                                <p>Tiempo de vida de filamentos de rayos X (XFTI):</p>
+                                <input class="input" id="sftl" type="text" placeholder="Ingrese XFTI en minutos" value="XFTI en minutos registrado">
                             </div>
                         </td>
                         <td>
@@ -86,12 +88,14 @@
                         </td>
                         <td>
                             <div id="btns-visualizar">
-                                <a href="#"><button class="visualizarR" id="eliminarR">Eliminar registro</button></a>
+                                <button class="visualizarR" id="eliminarR" onclick="accionEliminar()">Eliminar registro</button>
                                 <a href="../html/modificarRegistro.html"><button class="visualizarR">Modificar registro</button></a>
                             </div>
                         </td>
                     </tr>
                 </table>
+
+                <div id="emergente-eliminarR"></div>
 
             </div>
             <footer class="piePagina">

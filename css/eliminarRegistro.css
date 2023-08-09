@@ -35,9 +35,10 @@
     margin-bottom: 10%;
 }
 #cancelar{
-    background-color: #b31111;
+    background-color: #BEBEBE;
     margin-right: 5%;
 }
 #eliminar{
-    background-color: #BEBEBE;
+    background-color: #b31111;
+    color: white;
 }
