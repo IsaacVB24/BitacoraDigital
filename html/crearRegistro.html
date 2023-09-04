@@ -24,13 +24,13 @@
                         <td>
                             <div class="seccionTabla">
                                 <p>Nombre de usuario:</p>
-                                <input id="usuario" type="text" placeholder="Ingrese usuario">
+                                <input id="usuario" type="text" placeholder="Ingrese usuario" maxlength="20">
                             </div>
                         </td>
                         <td>
                             <div class="seccionTabla">
                                 <p>Número de solicitud:</p>
-                                <input id="numSolicitud" type="text" placeholder="Ingrese número de solicitud">
+                                <input id="numSolicitud" type="text" placeholder="Ingrese número de solicitud" maxlength="20">
                             </div>
                         </td>
                     </tr>
@@ -38,13 +38,14 @@
                         <td>
                             <div class="seccionTabla">
                                 <p>Clave de muestra:</p>
-                                <input id="clave" type="text" placeholder="Ingrese clave">
+                                <input id="clave" type="text" placeholder="Ingrese máximo 15 claves separados por coma">
+                                
                             </div>
                         </td>
                         <td>
                             <div class="seccionTabla">
                                 <p>Duración del análisis:</p>
-                                <input id="durAnalisis" type="text" placeholder="Ingrese duración del análisis">
+                                <input type="number" class="duracionAnalisis" id="horaAnalisis" placeholder="HH" max="999" min="0"> : <input type="number" class="duracionAnalisis" id="minutosAnalisis" placeholder="MM" max="59" min="1">
                             </div>
                         </td>
                     </tr>
@@ -60,13 +61,13 @@
                         <td>
                             <div class="seccionTabla">
                                 <p>Tiempo de vida de filamentos de rayos X (XFTI):</p>
-                                <input id="sftl" type="text" placeholder="Ingrese XFTI en minutos">
+                                <input type="number" class="duracionAnalisis" id="horaAnalisis" placeholder="HH" max="9999" min="0"> : <input type="number" class="duracionAnalisis" id="minutosAnalisis" placeholder="MM" max="59" min="1">
                             </div>
                         </td>
                         <td>
                             <div class="seccionTabla">
                                 <p>Presión en cámara de análisis:</p>
-                                <input id="presionCamara" type="text" placeholder="Ingrese presión en cámara en: [unidades]">
+                                <input id="presionCamara" type="text" placeholder="Ingrese presión en cámara en milibares (mbar)">
                             </div>
                         </td>
                     </tr>
