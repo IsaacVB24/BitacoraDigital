@@ -11,7 +11,7 @@
     padding: 10 50 10 50;
     font-family: Lato, Helvetica, sans-serif;
     border-radius: 20px;
-    background-color: rgb(100, 199, 160);
+    background-color: #64c7a0;
 }
 #eliminarR{
     background-color: rgb(150, 20, 20);
@@ -20,4 +20,9 @@
 #btns-visualizar{
     float: right;
     margin-right: 10%;
+}
+#btn-vis{
+    margin-left: auto;
+    display: flex;
+    border: 10px solid black;
 }

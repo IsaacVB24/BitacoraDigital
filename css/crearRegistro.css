@@ -46,17 +46,3 @@ td{
     float: right;
     margin-right: 10%;
 }
-.observaciones{
-    width: 100%;
-    resize: none;
-    padding: 8 7;
-    cursor: text;
-    border: 1px solid black;
-    border-radius: 10px;
-}
-.observaciones:focus{
-    background-color: rgb(246, 232, 153);
-}
-.duracionAnalisis{
-    text-align: center;
-}

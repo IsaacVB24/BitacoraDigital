@@ -1,18 +1,20 @@
 <html>
     <head>
-        <title>Visualizar registo</title>
+        <title>Visualizar registro</title>
         <link rel="stylesheet" href="../css/formatoPrincipal.css">
         <link rel="stylesheet" href="../css/crearRegistro.css">
         <link rel="stylesheet" href="../css/modificarRegistro.css">
         <link rel="stylesheet" href="../css/visualizarRegistro.css">
         <link rel="stylesheet" href="../css/eliminarRegistro.css">
+        <link rel="stylesheet" href="../css/formatoFormulario.css">
         <script type="text/javascript" src="../javaScript/version.js"></script>
         <script type="text/javascript" src="../javaScript/eliminarRegistro.js"></script>
         <script type="text/javaScript" src="../javaScript/modificarRegistros.js"></script>
         <script type="text/javaScript" src="../javaScript/visualizarRegistro.js"></script>
+        <script type="text/javaScript" src="../javaScript/formulario.js"></script>
     </head>
 
-    <body onload="version(), observaciones(), visualizar(), eliminar()">
+    <body onload="version(), eliminar(), crearFormulario(), visFormulario()">
         <div id="fondo">
             <div id="tituloPagina">
                 <p>VISUALIZAR REGISTRO</p>
@@ -25,72 +27,13 @@
                     </a>
                 </div>
 
-                <table id="tablaRegistroNuevo">
-                    <tr>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Nombre de usuario:</p>
-                                <input class="input" id="usuario" type="text" value="Usuario registrado">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Número de solicitud:</p>
-                                <input class="input" id="numSolicitud" type="text" placeholder="Ingrese número de solicitud" value="Número de solicitud registrado">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Clave de muestra:</p>
-                                <input class="input" id="clave" type="text" placeholder="Ingrese clave" value="Clave registrada">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Duración del análisis:</p>
-                                <input class="input" id="durAnalisis" type="text" placeholder="Ingrese duración del análisis" value="Duración en minutos registrada">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div class="seccionTabla">
-                                <p>Fuentes empleadas:</p>
-                                <input class="input" id="fuentesEmpleadas" type="text" placeholder="Ingrese las fuentes empleadas" value="Fuentes registradas">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Tiempo de vida de filamentos de rayos X (XFTI):</p>
-                                <input class="input" id="sftl" type="text" placeholder="Ingrese XFTI en minutos" value="XFTI en minutos registrado">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Presión en cámara de análisis:</p>
-                                <input class="input" id="presionCamara" type="text" placeholder="Ingrese presión en cámara en: [unidades]" value="Presión en [unidades] registrada">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Observaciones y/o eventos:</p>
-                                <textarea name="comentarios" class="observaciones" id="observaciones" cols="30" rows="5" placeholder="En caso de haber comentarios, colocarlos aquí." readonly></textarea>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="btns-visualizar">
-                                <button class="visualizarR" id="eliminarR" onclick="accionEliminar()">Eliminar registro</button>
-                                <a href="../html/modificarRegistro.html"><button class="visualizarR">Modificar registro</button></a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <div id="formulario"></div>
+
+                
+                <div id="bts-vis">          
+                    <button class="visualizarR" id="eliminarR" onclick="accionEliminar()">Eliminar registro</button>
+                    <a href="../html/modificarRegistro.html"><button class="visualizarR">Modificar registro</button></a>
+                </div>
 
                 <div id="emergente-eliminarR"></div>
 

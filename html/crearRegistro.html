@@ -1,12 +1,14 @@
 <html>
     <head>
-        <title>Crear registo</title>
+        <title>Crear registro</title>
         <link rel="stylesheet" href="../css/formatoPrincipal.css">
         <link rel="stylesheet" href="../css/crearRegistro.css">
+        <link rel="stylesheet" href="../css/formatoFormulario.css">
         <script type="text/javascript" src="../javaScript/version.js"></script>
+        <script type="text/javascript" src="../javaScript/formulario.js"></script>
     </head>
 
-    <body onload="version()">
+    <body onload="version(), crearFormulario()">
         <div id="fondo">
             <div id="tituloPagina">
                 <p>CREAR REGISTRO</p>
@@ -19,71 +21,10 @@
                     </a>
                 </div>
 
-                <table id="tablaRegistroNuevo">
-                    <tr>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Nombre de usuario:</p>
-                                <input id="usuario" type="text" placeholder="Ingrese usuario" maxlength="20">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Número de solicitud:</p>
-                                <input id="numSolicitud" type="text" placeholder="Ingrese número de solicitud" maxlength="20">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Clave de muestra:</p>
-                                <input id="clave" type="text" placeholder="Ingrese máximo 15 claves separados por coma">
-                                
-                            </div>
-                        </td>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Duración del análisis:</p>
-                                <input type="number" class="duracionAnalisis" id="horaAnalisis" placeholder="HH" max="999" min="0"> : <input type="number" class="duracionAnalisis" id="minutosAnalisis" placeholder="MM" max="59" min="1">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div class="seccionTabla">
-                                <p>Fuentes empleadas:</p>
-                                <input id="fuentesEmpleadas" type="text" placeholder="Ingrese las fuentes empleadas">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Tiempo de vida de filamentos de rayos X (XFTI):</p>
-                                <input type="number" class="duracionAnalisis" id="horaAnalisis" placeholder="HH" max="9999" min="0"> : <input type="number" class="duracionAnalisis" id="minutosAnalisis" placeholder="MM" max="59" min="1">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Presión en cámara de análisis:</p>
-                                <input id="presionCamara" type="text" placeholder="Ingrese presión en cámara en milibares (mbar)">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="seccionTabla">
-                                <p>Observaciones y/o eventos:</p>
-                                <textarea name="comentarios" class="observaciones" cols="30" rows="5" placeholder="En caso de haber comentarios, colocarlos aquí."></textarea>
-                            </div>
-                        </td>
-                        <td>
-                            <a href="#"><button class="btn-registros" id="btn-crearR">Crear nuevo registro</button></a>
-                        </td>
-                    </tr>
-                </table>
-                
+                <div id="formulario">
+                    
+                </div>
+                <a href="#"><button class="btn-registros" id="btn-crearR">Crear nuevo registro</button></a>
 
             </div>
             <footer class="piePagina">
