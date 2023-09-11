@@ -21,8 +21,7 @@
     float: right;
     margin-right: 10%;
 }
-#btn-vis{
+#bts-vis{
     margin-left: auto;
     display: flex;
-    border: 10px solid black;
 }
