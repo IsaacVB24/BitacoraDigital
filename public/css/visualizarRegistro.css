@@ -12,6 +12,7 @@
     font-family: Lato, Helvetica, sans-serif;
     border-radius: 20px;
     background-color: #64c7a0;
+    cursor: pointer;
 }
 #eliminarR{
     background-color: rgb(150, 20, 20);
