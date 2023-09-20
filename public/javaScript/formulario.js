@@ -34,6 +34,6 @@ function cargarDatos(){
 }
 
 function modificarFormulario(){
-    document.getElementById('formulario').innerHTML = '<form action="/modificarRegistro" method="POST">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Crear nuevo registro</button></div></form>';
+    document.getElementById('formulario').innerHTML = '<form action="/modificarRegistro" method="POST">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Modificar registro</button></div></form>';
     cargarDatos();
 }
