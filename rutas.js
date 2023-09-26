@@ -40,4 +40,16 @@ router.post('/crearRegistro', (req, res) => {
     res.redirect('/'); // Redirige de vuelta a la página principal
 });
 
+// Ruta para obtener registros desde la base de datos
+router.get('/obtenerRegistros', (req, res) => {
+    baseDeDatos.db.all('SELECT * FROM registros', (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Error al obtener registros' });
+        } else {
+            res.json(rows); // Devuelve los registros en formato JSON
+        }
+    });
+});
+
 module.exports = router;

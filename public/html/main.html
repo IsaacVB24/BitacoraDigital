@@ -3,11 +3,13 @@
         <title>Bitácora virtual</title>
         <link rel="stylesheet" href="/css/formatoPrincipal.css">
         <link rel="stylesheet" href="/css/eliminarRegistro.css">
+        <link rel="stylesheet" href="/css/tabla.css">
         <script type="text/javascript" src="/javaScript/version.js"></script>
         <script type="text/javascript" src="/javaScript/eliminarRegistro.js"></script>
+        <script type="text/javascript" src="/javaScript/tabla.js"></script>
     </head>
 
-    <body onload="version(), eliminar()">
+    <body onload="version(), eliminar(), mostrarRegistros()">
         <div id="fondo">
             <div id="tituloPagina">
                 <p>BITÁCORA DE LABORATORIO (Quitar vínculos de botones: Modificar, Visualizar y Eliminar Registro)</p>
@@ -70,6 +72,6 @@
                 <div id="contPie">
                 </div>
             </footer>
-        </div>
+        </div>        
     </body>
 </html>
