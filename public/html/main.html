@@ -9,7 +9,7 @@
         <script type="text/javascript" src="/javaScript/tabla.js"></script>
     </head>
 
-    <body onload="version(), eliminar(), mostrarRegistros()">
+    <body onload="version(), mostrarRegistros()">
         <div id="fondo">
             <div id="tituloPagina">
                 <p>BITÁCORA DE LABORATORIO (Quitar vínculos de botones: Modificar, Visualizar y Eliminar Registro)</p>
@@ -21,7 +21,10 @@
                     <a href="/crearRegistro"><button class="btn-registros" id="crearR">Crear registro</button></a>
                     <a href="/modificarRegistro"><button class="btn-registros" id="modificarR">Modificar registro</button></a>
                     <a href="/visualizarRegistro"><button class="btn-registros" id="visualizarR">Visualizar registro</button></a>
+                    <button class="btn-registros" id="eliminarR">Eliminar registro</button>
+                    <!--
                     <button class="btn-registros" id="eliminarR" onclick="accionEliminar()">Eliminar registro</button>
+                    -->
                 </div>
                 <!-- Búsqueda y filtrado -->
                 <div class="busqFiltr">
