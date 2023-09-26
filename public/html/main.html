@@ -42,17 +42,19 @@
                 <!-- Contenido tabla -->
                 <div id="estrTabla">
                     <table class="tabla">
-                        <tr>
-                            <th><div class="encabezado" id="seleccionar">Seleccionar<br><img id="clic" src="/imagenes/clic.png"></div></th>
-                            <th><p class="encabezado">Nombre de usuario</p></th>
-                            <th><p class="encabezado">Número de solicitud</p></th>
-                            <th><p class="encabezado">Fecha</p></th>
-                            <th><p class="encabezado">Clave de muestra</p></th>
-                            <th><p class="encabezado">Fuentes empleadas</p></th>
-                        </tr>
-                        <tr>
-                            <td colspan="6"><center id="sinRegistro">Aún no hay registros, cree uno para empezar o importe datos de alguna ruta.</center></th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th><div class="encabezado" id="seleccionar">Seleccionar<br><img id="clic" src="/imagenes/clic.png"></div></th>
+                                <th><p class="encabezado">Nombre de usuario</p></th>
+                                <th><p class="encabezado">Número de solicitud</p></th>
+                                <th><p class="encabezado">Fecha</p></th>
+                                <th><p class="encabezado">Clave de muestra</p></th>
+                                <th><p class="encabezado">Fuentes empleadas</p></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaRegistros">
+                            <!-- Aquí se agregarán las filas de la tabla dinámicamente -->
+                        </tbody>
                     </table>
                 </div>
                 <!-- Texto y botones de importar y exportar -->

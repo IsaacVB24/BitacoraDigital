@@ -7,6 +7,9 @@ const puerto = 3000; // Número de puerto que esté disponible
 // Configuración para servir archivos estáticos desde la carpeta "public"
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware para analizar datos de formularios
+app.use(express.urlencoded({ extended: true }));
+
 // Rutas de la aplicación
 const rutas = require('./rutas'); // Importa las rutas desde el archivo rutas.js
 app.use('/', rutas);
