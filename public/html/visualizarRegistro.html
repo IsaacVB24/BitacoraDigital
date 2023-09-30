@@ -8,13 +8,14 @@
         <link rel="stylesheet" href="/css/eliminarRegistro.css">
         <link rel="stylesheet" href="/css/formatoFormulario.css">
         <script type="text/javascript" src="/javaScript/version.js"></script>
+        <script type="text/javascript" src="/javaScript/tabla.js"></script>
         <script type="text/javascript" src="/javaScript/eliminarRegistro.js"></script>
         <script type="text/javaScript" src="/javaScript/modificarRegistros.js"></script>
         <script type="text/javaScript" src="/javaScript/visualizarRegistro.js"></script>
         <script type="text/javaScript" src="/javaScript/formulario.js"></script>
     </head>
 
-    <body onload="version(), eliminar(), crearFormulario(), visFormulario()">
+    <body onload="version(), crearFormulario(), visFormulario()">
         <div id="fondo">
             <div id="tituloPagina">
                 <p>VISUALIZAR REGISTRO</p>
@@ -31,7 +32,7 @@
 
                 
                 <div id="bts-vis">          
-                    <button class="visualizarR" id="eliminarR" onclick="accionEliminar()">Eliminar registro</button>
+                    <button class="btn-registros" id="eliminarR-vis" onclick="eliminar()" style="pointer-events: all; cursor: pointer;">Eliminar registro</button>
                     <a href="/modificarRegistro"><button class="visualizarR">Modificar registro</button></a>
                 </div>
 

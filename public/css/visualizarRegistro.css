@@ -14,7 +14,7 @@
     background-color: #64c7a0;
     cursor: pointer;
 }
-#eliminarR{
+#eliminarR, #eliminarR-vis{
     background-color: rgb(150, 20, 20);
     color: white;
 }

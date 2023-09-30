@@ -70,9 +70,7 @@ a:hover{
     border-radius: 20px;
     background-color: rgb(100, 199, 160);
 }
-#crearR:hover{
-    background-color: rgb(82, 170, 134);
-    cursor: pointer;
+#crearR:hover, #eliminarR:hover{
     transition: font-size .5s;
     font-size: 20px;
 }
@@ -82,6 +80,7 @@ a:hover{
 }
 #eliminarR{
     color: rgba(121, 0, 0, 0.450);
+    pointer-events: none;
 }
 .busqFiltr{
     display: flex;
