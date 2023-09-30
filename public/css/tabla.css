@@ -6,3 +6,8 @@ td{
     text-align: center;
     padding: 3px;
 }
+/* Estilo personalizado para los checkboxes */
+input[type="checkbox"] {
+    width: 15px; /* Ancho personalizado */
+    height: 15px; /* Altura personalizada */
+}

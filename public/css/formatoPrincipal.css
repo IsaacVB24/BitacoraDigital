@@ -70,13 +70,18 @@ a:hover{
     border-radius: 20px;
     background-color: rgb(100, 199, 160);
 }
-#crearR:hover, #eliminarR:hover{
+.btn-registros:hover{
+    background-color: rgb(69, 168, 129);
+}
+#crearR:hover, #eliminarR:hover, #modificarR:hover, #visualizarR:hover{
     transition: font-size .5s;
     font-size: 20px;
+    cursor: pointer;
 }
 #modificarR, #visualizarR, #eliminarR{
     background-color: rgba(100, 199, 159, 0.400);
     color: rgba(0, 0, 0, 0.450);
+    pointer-events: none;
 }
 #eliminarR{
     color: rgba(121, 0, 0, 0.450);
