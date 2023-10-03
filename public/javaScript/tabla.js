@@ -142,8 +142,7 @@ function mostrarRegistros() {
             if (data.length === 0) {
                 const sinRegistro = document.createElement('tr');
                 sinRegistro.innerHTML = `
-                    <td colspan="6"><center id="sinRegistro">Aún no hay registros, <a href="/crearRegistro">cree uno</a> para empezar o importe datos de alguna ruta.</center></th>
-                `;
+                    <td colspan="6"><center id="sinRegistro">Aún no hay registros, <a href="/crearRegistro">cree uno</a> para empezar o importe datos de alguna ruta.</center></th>`;
                 tablaRegistros.appendChild(sinRegistro);
             }
         })
