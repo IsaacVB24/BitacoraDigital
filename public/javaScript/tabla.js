@@ -5,27 +5,24 @@ function eliminar(){
     document.getElementById("emergente-eliminarR").style.display = "block";
 }
 
-const seleccionarTodo = document.getElementById("seleccionarTodo");
-
 function seleccionarTodosLosRegistros() {
+    const seleccionarTodo = document.getElementById("seleccionarTodo");
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let alMenosUnoSeleccionado = false;
     
     checkboxes.forEach(checkbox => {
-        checkbox.checked = !checkbox.checked; // Cambia el estado de todos los checkboxes
-        handleCheckboxChange({ target: checkbox }); // Llama a la función para manejar el cambio de los checkboxes
-    });
-}
-
-function deseleccionarTodos() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = false; // Desactiva todos los checkboxes
+        if (checkbox.checked) {
+            alMenosUnoSeleccionado = true;
+            checkbox.checked = false; // Deselecciona todos los checkboxes activos
+            handleCheckboxChange({ target: checkbox }); // Llama a la función para manejar el cambio de los checkboxes
+        }
     });
 
-    // Desactiva el checkbox "Seleccionar Todos" (si existe)
-    if (seleccionarTodo) {
-        seleccionarTodo.checked = false;
+    if (!alMenosUnoSeleccionado) {
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = true; // Selecciona todos los checkboxes
+            handleCheckboxChange({ target: checkbox }); // Llama a la función para manejar el cambio de los checkboxes
+        });
     }
 }
 
@@ -57,6 +54,15 @@ function handleCheckboxChange(event) {
         registrosSeleccionados.add(registroId);
     } else {
         registrosSeleccionados.delete(registroId);
+    }
+    const seleccionarTodo = document.getElementById("seleccionarTodo");
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    // Verifica si no todos los checkboxes están seleccionados y ajusta el color de fondo en consecuencia
+    if (registrosSeleccionados.size !== checkboxes.length) {
+        seleccionarTodo.style.backgroundColor = "white";
+    } else {
+        seleccionarTodo.style.backgroundColor = "gray";
     }
     // Habilitar o deshabilitar el botón de eliminar según si hay registros seleccionados
     const botonEliminar = document.getElementById('eliminarR');
@@ -194,9 +200,10 @@ function confirmar() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('Registros eliminados con éxito.');
                 // Actualiza la tabla después de la eliminación
                 mostrarRegistros();
+                alert('Registros eliminados con éxito.');
+                seleccionarTodosLosRegistros();
             } else {
                 alert('Error al eliminar registros.');
             }
