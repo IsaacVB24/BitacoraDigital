@@ -5,6 +5,30 @@ function eliminar(){
     document.getElementById("emergente-eliminarR").style.display = "block";
 }
 
+const seleccionarTodo = document.getElementById("seleccionarTodo");
+
+function seleccionarTodosLosRegistros() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = !checkbox.checked; // Cambia el estado de todos los checkboxes
+        handleCheckboxChange({ target: checkbox }); // Llama a la función para manejar el cambio de los checkboxes
+    });
+}
+
+function deseleccionarTodos() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false; // Desactiva todos los checkboxes
+    });
+
+    // Desactiva el checkbox "Seleccionar Todos" (si existe)
+    if (seleccionarTodo) {
+        seleccionarTodo.checked = false;
+    }
+}
+
 function crear(){
     // Redirigir a crear registo
     window.location.href = 'crearRegistro';
