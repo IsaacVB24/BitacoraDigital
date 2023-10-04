@@ -30,7 +30,7 @@ function deseleccionarTodos() {
 }
 
 function crear(){
-    // Redirigir a crear registo
+    // Redirigir a crear registro
     window.location.href = 'crearRegistro';
 }
 function visualizar(){
@@ -101,11 +101,6 @@ function handleCheckboxChange(event) {
         botonVisualizar.addEventListener('mouseleave', function(){
             botonVisualizar.style.backgroundColor = "rgb(100, 199, 160)";
         });
-
-        botonCrear.style.backgroundColor = 'rgba(100, 199, 159, 0.400)'; // Cambia el color del botón
-        botonCrear.style.color = 'rgba(0, 0, 0, 0.450)'; // Cambia el color de letra del botón
-        botonCrear.style.pointerEvents = "none";
-        botonCrear.disabled = false; // Habilita el botón
     } else {
         botonEliminar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
         botonEliminar.style.color = 'rgba(121, 0, 0, 0.450)';
@@ -118,11 +113,6 @@ function handleCheckboxChange(event) {
         botonVisualizar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
         botonVisualizar.style.color = 'rgba(0, 0, 0, 0.450)';
         botonVisualizar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
-        
-        botonCrear.style.backgroundColor = '#64c7a0'; // Cambia el color del botón
-        botonCrear.style.color = 'black'; // Cambia el color de letra del botón
-        botonCrear.style.pointerEvents = "all";
-        botonCrear.disabled = false; // Habilita el botón
     }
 }
 
@@ -158,6 +148,13 @@ function mostrarRegistros() {
                     <td colspan="6"><center id="sinRegistro">Aún no hay registros, <a href="/crearRegistro">cree uno</a> para empezar o importe datos de alguna ruta.</center></th>`;
                 tablaRegistros.appendChild(sinRegistro);
             }
+
+            // Habilitar el botón de crear registro después de cargar los datos
+            const botonCrear = document.getElementById("crearR");
+            botonCrear.style.backgroundColor = '#64c7a0'; // Cambia el color del botón
+            botonCrear.style.color = 'black'; // Cambia el color de letra del botón
+            botonCrear.style.pointerEvents = "all";
+            botonCrear.disabled = false; // Habilita el botón
         })
         .catch(error => console.error('Error al obtener registros:', error));
 }
