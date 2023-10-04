@@ -38,6 +38,7 @@ function handleCheckboxChange(event) {
     const botonEliminar = document.getElementById('eliminarR');
     const botonModificar = document.getElementById('modificarR');
     const botonVisualizar = document.getElementById('visualizarR');
+    const botonCrear = document.getElementById("crearR");
     botonEliminar.style.pointerEvents = "none";
     botonModificar.style.pointerEvents = "none";
     botonVisualizar.style.pointerEvents = "none";
@@ -76,6 +77,11 @@ function handleCheckboxChange(event) {
         botonVisualizar.addEventListener('mouseleave', function(){
             botonVisualizar.style.backgroundColor = "rgb(100, 199, 160)";
         });
+
+        botonCrear.style.backgroundColor = 'rgba(100, 199, 159, 0.400)'; // Cambia el color del botón
+        botonCrear.style.color = 'rgba(0, 0, 0, 0.450)'; // Cambia el color de letra del botón
+        botonCrear.style.pointerEvents = "none";
+        botonCrear.disabled = false; // Habilita el botón
     } else {
         botonEliminar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
         botonEliminar.style.color = 'rgba(121, 0, 0, 0.450)';
@@ -88,6 +94,11 @@ function handleCheckboxChange(event) {
         botonVisualizar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
         botonVisualizar.style.color = 'rgba(0, 0, 0, 0.450)';
         botonVisualizar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
+        
+        botonCrear.style.backgroundColor = '#64c7a0'; // Cambia el color del botón
+        botonCrear.style.color = 'black'; // Cambia el color de letra del botón
+        botonCrear.style.pointerEvents = "all";
+        botonCrear.disabled = false; // Habilita el botón
     }
 }
 
