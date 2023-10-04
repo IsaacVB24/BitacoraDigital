@@ -32,6 +32,19 @@ function guardarRegistro(nuevoRegistro) {
   stmt.finalize();
 }
 
+// Función para eliminar un registro por su ID
+function eliminarRegistroPorId(registroId, callback) {
+  const sql = 'DELETE FROM registros WHERE id = ?';
+  db.run(sql, registroId, function (err) {
+    if (err) {
+      console.error('Error al eliminar el registro:', err.message);
+      callback(err);
+    } else {
+      callback(null);
+    }
+  });
+}
+
 process.on('exit', () => {
   db.close();
 });
@@ -39,4 +52,5 @@ process.on('exit', () => {
 module.exports = {
   db,
   guardarRegistro,
+  eliminarRegistroPorId,
 };

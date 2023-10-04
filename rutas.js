@@ -52,4 +52,36 @@ router.get('/obtenerRegistros', (req, res) => {
     });
 });
 
+// Ruta para eliminar registros
+router.post('/eliminarRegistros', (req, res) => {
+    const registrosAEliminar = req.body.registros;
+    if (!registrosAEliminar || registrosAEliminar.length === 0) {
+        res.json({ success: false, message: 'No se proporcionaron registros para eliminar.' });
+        return;
+    }
+    
+    const resultados = [];
+    
+    registrosAEliminar.forEach(registroId => {
+        baseDeDatos.eliminarRegistroPorId(registroId, err => {
+            if (err) {
+                console.error('Error al eliminar el registro:', err);
+                resultados.push({ success: false, id: registroId, error: err.message }); // Agrega el mensaje de error al objeto de resultado
+            } else {
+                resultados.push({ success: true, id: registroId });
+            }
+            
+            // Si se procesaron todos los registros
+            if (resultados.length === registrosAEliminar.length) {
+                const exitoso = resultados.every(resultado => resultado.success);
+                if (exitoso) {
+                    res.json({ success: true, message: 'Registros eliminados con éxito.' });
+                } else {
+                    res.json({ success: false, message: 'Error al eliminar algunos registros.', results: resultados });
+                }
+            }
+        });
+    });
+});
+
 module.exports = router;

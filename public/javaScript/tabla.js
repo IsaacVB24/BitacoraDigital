@@ -18,21 +18,6 @@ function modificar(){
     window.location.href = 'modificarRegistro';
 }
 
-function confirmar() {
-    /*
-    // Verificar si al menos un checkbox está seleccionado
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    const alMenosUnoSeleccionado = checkboxes.length > 0;
-    
-    if (alMenosUnoSeleccionado) {
-        document.getElementById("emergente-eliminarR").style.display = "block";
-    } else {
-        // Puedes mostrar un mensaje de advertencia al usuario aquí
-        alert("Por favor, seleccione al menos un registro para eliminar.");
-    }
-    */
-}
-
 function cancelar(){
     document.getElementById("emergente-eliminarR").style.display = "none";
 }
@@ -49,13 +34,6 @@ function handleCheckboxChange(event) {
     } else {
         registrosSeleccionados.delete(registroId);
     }
-    /*
-    <div class="botonesRegistros">
-                    <a href="/crearRegistro"><button class="btn-registros" id="crearR">Crear registro</button></a>
-                    <a href="/modificarRegistro"><button class="btn-registros" id="modificarR">Modificar registro</button></a>
-                    <a href="/visualizarRegistro"><button class="btn-registros" id="visualizarR">Visualizar registro</button></a>
-                    <button class="btn-registros" id="eliminarR" onclick="eliminar()">Eliminar registro</button>
-    */
     // Habilitar o deshabilitar el botón de eliminar según si hay registros seleccionados
     const botonEliminar = document.getElementById('eliminarR');
     const botonModificar = document.getElementById('modificarR');
@@ -147,6 +125,51 @@ function mostrarRegistros() {
             }
         })
         .catch(error => console.error('Error al obtener registros:', error));
+}
+
+function confirmar() {
+    const botonEliminar = document.getElementById('eliminarR');
+    const botonModificar = document.getElementById('modificarR');
+    const botonVisualizar = document.getElementById('visualizarR');
+    if (registrosSeleccionados.size > 0) {
+        const registrosAEliminar = Array.from(registrosSeleccionados); // Convierte el conjunto a un array
+        //console.log('IDs de registros a eliminar:', registrosAEliminar);
+
+        // Envía una solicitud para eliminar los registros seleccionados
+        fetch('/eliminarRegistros', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ registros: registrosAEliminar }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Registros eliminados con éxito.');
+                // Actualiza la tabla después de la eliminación
+                mostrarRegistros();
+            } else {
+                alert('Error al eliminar registros.');
+            }
+        })
+        .catch(error => console.error('Error al eliminar registros:', error));
+        document.getElementById("emergente-eliminarR").style.display = "none";
+        registrosSeleccionados.clear();
+        botonEliminar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
+        botonEliminar.style.color = 'rgba(121, 0, 0, 0.450)';
+        botonEliminar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
+        
+        botonModificar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
+        botonModificar.style.color = 'rgba(0, 0, 0, 0.450)';
+        botonModificar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
+        
+        botonVisualizar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
+        botonVisualizar.style.color = 'rgba(0, 0, 0, 0.450)';
+        botonVisualizar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
+    } else {
+        alert("Por favor, seleccione al menos un registro para eliminar.");
+    }
 }
 
 // Llama a la función para mostrar los registros al cargar la página

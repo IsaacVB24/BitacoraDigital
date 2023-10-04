@@ -9,10 +9,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware para analizar datos de formularios
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // Agrega soporte para JSON
 
 // Rutas de la aplicación
 const rutas = require('./rutas'); // Importa las rutas desde el archivo rutas.js
 app.use('/', rutas);
+
+// Middleware para manejar errores 404
+app.use((req, res, next) => {
+    res.status(404).send('Página no encontrada');
+});
 
 // Iniciar el servidor
 app.listen(puerto, () => {
