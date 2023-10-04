@@ -101,6 +101,11 @@ function handleCheckboxChange(event) {
         botonVisualizar.addEventListener('mouseleave', function(){
             botonVisualizar.style.backgroundColor = "rgb(100, 199, 160)";
         });
+
+        botonCrear.style.backgroundColor = 'rgba(100, 199, 159, 0.400)'; // Cambia el color del botón
+        botonCrear.style.color = 'rgba(0, 0, 0, 0.450)'; // Cambia el color de letra del botón
+        botonCrear.style.pointerEvents = "none";
+        botonCrear.disabled = false; // Habilita el botón
     } else {
         botonEliminar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
         botonEliminar.style.color = 'rgba(121, 0, 0, 0.450)';
@@ -113,6 +118,11 @@ function handleCheckboxChange(event) {
         botonVisualizar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
         botonVisualizar.style.color = 'rgba(0, 0, 0, 0.450)';
         botonVisualizar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
+
+        botonCrear.style.backgroundColor = '#64c7a0'; // Cambia el color del botón
+        botonCrear.style.color = 'black'; // Cambia el color de letra del botón
+        botonCrear.style.pointerEvents = "all";
+        botonCrear.disabled = false; // Habilita el botón
     }
 }
 
@@ -155,6 +165,12 @@ function mostrarRegistros() {
             botonCrear.style.color = 'black'; // Cambia el color de letra del botón
             botonCrear.style.pointerEvents = "all";
             botonCrear.disabled = false; // Habilita el botón
+            botonCrear.addEventListener('mouseenter', function(){
+                botonCrear.style.backgroundColor = "rgb(69, 168, 129)";
+            });
+            botonCrear.addEventListener('mouseleave', function(){
+                botonCrear.style.backgroundColor = "rgb(100, 199, 160)";
+            });
         })
         .catch(error => console.error('Error al obtener registros:', error));
 }
