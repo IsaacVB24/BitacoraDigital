@@ -9,15 +9,8 @@ input[type="checkbox"] {
     height: 15px;
 }
 
-/* Restablece el formato predeterminado de los elementos en la tabla */
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
 /* Aplica un borde a todas las celdas (th y td) en la tabla */
 th, td {
-    border: 1px solid black;
     padding: 8px; /* Ajusta el espacio interior de las celdas según sea necesario */
     text-align: center; /* Centra el texto en todas las celdas */
 }
