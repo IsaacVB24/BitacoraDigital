@@ -130,6 +130,9 @@ function handleCheckboxChange(event) {
         botonCrear.style.pointerEvents = "all";
         botonCrear.disabled = false; // Habilita el botón
     }
+
+    // Llama a la función para guardar los datos del registro seleccionado
+    guardarDatosDelRegistroSeleccionado();
 }
 
 // Función para obtener los registros de la base de datos y mostrarlos en la tabla
