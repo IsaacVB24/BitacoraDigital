@@ -84,4 +84,25 @@ router.post('/eliminarRegistros', (req, res) => {
     });
 });
 
+// Ruta para obtener los detalles de un registro por su ID
+router.get('/obtenerRegistro/:id', (req, res) => {
+    const registroId = req.params.id;
+
+    // Lógica para obtener los detalles del registro por su ID
+    baseDeDatos.db.get('SELECT * FROM registros WHERE id = ?', [registroId], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Error al obtener el registro' });
+        } else if (row) {
+            // Si se encuentra un registro, asigna los detalles a registroEncontrado
+            const registroEncontrado = row;
+            //console.log(registroEncontrado);
+            res.json({ registro: registroEncontrado });
+        } else {
+            // Si no se encuentra un registro, responde con un estado 404
+            res.status(404).json({ error: 'Registro no encontrado' });
+        }
+    });
+});
+
 module.exports = router;
