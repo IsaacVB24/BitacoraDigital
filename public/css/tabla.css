@@ -45,7 +45,13 @@ td:first-child {
 .tabla-content {
     max-height: 400px; /* Establece una altura máxima para el contenido de la tabla */
     overflow-y: scroll; /* Agrega una barra de desplazamiento vertical si es necesario */
-    border: 2px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.tabla{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
 /* Añade un fondo cuando se pasa el cursor sobre una fila */
