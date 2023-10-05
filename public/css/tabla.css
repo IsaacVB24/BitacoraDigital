@@ -2,12 +2,53 @@ a{
     cursor: pointer;
     color: blue;
 }
-td{
-    text-align: center;
-    padding: 3px;
-}
+
 /* Estilo personalizado para los checkboxes */
 input[type="checkbox"] {
-    width: 15px; /* Ancho personalizado */
-    height: 15px; /* Altura personalizada */
+    width: 15px;
+    height: 15px;
+}
+
+/* Restablece el formato predeterminado de los elementos en la tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Aplica un borde a todas las celdas (th y td) en la tabla */
+th, td {
+    border: 1px solid black;
+    padding: 8px; /* Ajusta el espacio interior de las celdas según sea necesario */
+    text-align: center; /* Centra el texto en todas las celdas */
+}
+
+/* Estilo personalizado para los checkboxes */
+input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+}
+
+/* Añade un fondo a las celdas del encabezado */
+th {
+    background-color: #f2f2f2;
+    position: sticky; /* Fija el encabezado en su posición */
+    top: 0; /* Fija el encabezado en la parte superior */
+    z-index: 1; /* Coloca el encabezado por encima del contenido */
+}
+
+/* Elimina el borde izquierdo de la primera columna en el cuerpo de la tabla */
+td:first-child {
+    border-left: none;
+}
+
+/* Estilo para el contenido de la tabla */
+.tabla-content {
+    max-height: 400px; /* Establece una altura máxima para el contenido de la tabla */
+    overflow-y: scroll; /* Agrega una barra de desplazamiento vertical si es necesario */
+    border: 2px solid black;
+}
+
+/* Añade un fondo cuando se pasa el cursor sobre una fila */
+tr:hover {
+    background-color: #ddd;
 }

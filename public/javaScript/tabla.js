@@ -60,7 +60,7 @@ function handleCheckboxChange(event) {
     
     // Verifica si no todos los checkboxes están seleccionados y ajusta el color de fondo en consecuencia
     if (registrosSeleccionados.size !== checkboxes.length) {
-        seleccionarTodo.style.backgroundColor = "white";
+        seleccionarTodo.style.backgroundColor = "#f2f2f2";
     } else {
         seleccionarTodo.style.backgroundColor = "gray";
     }
@@ -147,12 +147,12 @@ function mostrarRegistros() {
             data.forEach(registro => {
                 const fila = document.createElement('tr');
                 fila.innerHTML = `
-                    <td><input type="checkbox" data-registro-id="${registro.id}" onchange="handleCheckboxChange(event)"></td>
-                    <td>${registro.nombre_usuario}</td>
-                    <td>${registro.num_solicitud}</td>
-                    <td>${registro.fecha}</td>
-                    <td>${registro.clave_muestra}</td>
-                    <td>${registro.fuentes_empleadas}</td>
+                    <td id='encSeleccionar'><input type="checkbox" data-registro-id="${registro.id}" onchange="handleCheckboxChange(event)"></td>
+                    <td id='usuario'>${registro.nombre_usuario}</td>
+                    <td id='solicitud'>${registro.num_solicitud}</td>
+                    <td id='fecha'>${registro.fecha}</td>
+                    <td id='clave'>${registro.clave_muestra}</td>
+                    <td id='fuentes'>${registro.fuentes_empleadas}</td>
                 `;
                 tablaRegistros.appendChild(fila);
             });
