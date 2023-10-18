@@ -40,6 +40,35 @@ router.post('/crearRegistro', (req, res) => {
     res.redirect('/'); // Redirige de vuelta a la página principal
 });
 
+// Ruta para manejar la modificación de un registro
+router.post('/modificarRegistro', (req, res) => {
+    const registroAModificar = {
+        nombre_usuario: req.body.nomUs,
+        num_solicitud: req.body.numSol,
+        clave_muestra: req.body.clavMues,
+        fuentes_empleadas: req.body.fuenEmpl,
+        duracion_analisis: `${req.body.durAn}`,
+        tiempo_vida_filamentos: `${req.body.xfti}`,
+        presion_camara_analisis: req.body.presCam,
+        observaciones: req.body.observaciones,
+    };
+
+    // Recupera la fecha original del registro desde la base de datos
+    baseDeDatos.db.get('SELECT fecha FROM registros WHERE id = ?', [req.body.idRegistro], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Error al obtener la fecha original' });
+        } else if (row) {
+            registroAModificar.fecha = row.fecha; // Usa la fecha original
+            baseDeDatos.actualizarRegistro(req.body.idRegistro, registroAModificar);
+            res.redirect('/');
+        } else {
+            // Maneja el caso en el que no se encuentra el registro
+            res.status(404).json({ error: 'Registro no encontrado' });
+        }
+    });
+});
+
 // Ruta para obtener registros desde la base de datos
 router.get('/obtenerRegistros', (req, res) => {
     baseDeDatos.db.all('SELECT * FROM registros', (err, rows) => {

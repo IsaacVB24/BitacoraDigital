@@ -12,37 +12,56 @@ function eliminar() {
     emergente.style.display = "block";
 }
 
-function eliminarEnVis() {
-    // Obtén el ID del registro seleccionado almacenado en localStorage
-    const registroSeleccionado = JSON.parse(localStorage.getItem('registroSeleccionado'));
-    //console.log(registroSeleccionado);
-    // Si hay un registro seleccionado, procede a eliminarlo
-    if (registroSeleccionado) {
-        const registroId = registroSeleccionado.registro.id;
-        //console.log(registroId);
-        const url = `/eliminarRegistro/${registroId}`; // Construye la URL con el ID del registro
-
-        fetch(url, {
-            method: 'DELETE', // Usa el método HTTP DELETE
-        })
-        .then(response => {
-            if (response.ok) {
-                // El servidor respondió correctamente, muestra un alert informativo
-                alert('Registro eliminado con éxito');
-                // Redirige a la página principal
-                window.location.href = '/';
-            } else {
-                // El servidor respondió con un error, puedes manejarlo de la manera que consideres adecuada.
-                console.error('Error al eliminar el registro:', response.status);
-            }
-        })
-        .catch(error => {
-            console.error('Error en la solicitud:', error);
-        });
-    } else {
-        console.error('No hay registro seleccionado para eliminar.');
-    }
+function habilitarBotonPrincipal(nombreBoton){
+    const botonCrear = document.getElementById(nombreBoton);
+    // Si no se selecciona ningún registro, habilita el botón de Crear registro
+    botonCrear.style.backgroundColor = '#64c7a0';
+    botonCrear.style.color = 'black';
+    botonCrear.style.pointerEvents = 'all'; // Habilita las interacciones del botón
 }
+function deshabilitarBotonPrincipal(nombreBoton){
+    const botonCrear = document.getElementById(nombreBoton);
+    // Si se selecciona uno o más registros, deshabilita el botón de Crear registro
+    botonCrear.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
+    botonCrear.style.color = 'rgba(0, 0, 0, 0.450)';
+    botonCrear.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
+}
+function habilitarBotonEliminarR(){
+    const botonEliminar = document.getElementById('eliminarR');
+    botonEliminar.style.backgroundColor = '#64c7a0';
+    botonEliminar.style.color = 'rgb(121, 0, 0)';
+    botonEliminar.style.pointerEvents = 'all';
+}
+function deshabilitarBotonEliminarR(){
+    const botonEliminar = document.getElementById('eliminarR');
+    botonEliminar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
+    botonEliminar.style.color = 'rgba(121, 0, 0, 0.450)';
+    botonEliminar.style.pointerEvents = 'none';
+}
+
+function handleCheckboxChange(event) {
+    const checkbox = event.target;
+    const registroId = checkbox.getAttribute('data-registro-id');
+    const seleccionarTodo = document.getElementById("seleccionarTodo");
+  
+    if (checkbox.checked) {
+      registrosSeleccionados.add(registroId);
+  
+      // Cambia la URL para que coincida con el parámetro esperado en la ruta
+      fetch(`/obtenerRegistro/${registroId}`)
+        .then(response => response.json())
+        .then(data => {
+          // Almacena los valores en localStorage
+          localStorage.setItem('registroSeleccionado', JSON.stringify(data));
+  
+          // Muestra los valores recuperados en la consola
+          //console.log('Datos del registro seleccionado:', data);
+        })
+        .catch(error => console.error('Error al obtener datos del registro:', error));
+    } else {
+      registrosSeleccionados.delete(registroId);
+    }
+  }  
 
 function seleccionarTodosLosRegistros() {
     const seleccionarTodo = document.getElementById("seleccionarTodo");
@@ -102,8 +121,8 @@ function handleCheckboxChange(event) {
             // Almacena los 10 valores en localStorage
             localStorage.setItem('registroSeleccionado', JSON.stringify(data));
 
-            // Muestra los 10 valores recuperados en la consola
-            console.log('Datos del registro seleccionado:', data);
+            // Muestra los valores recuperados en la consola
+            //console.log('Datos del registro seleccionado:', data);
         })
         .catch(error => console.error('Error al obtener datos del registro:', error));
     } else {
@@ -120,70 +139,26 @@ function handleCheckboxChange(event) {
     }
 
     // Habilitar o deshabilitar el botón de eliminar según si hay registros seleccionados
-    const botonEliminar = document.getElementById('eliminarR');
-    const botonModificar = document.getElementById('modificarR');
-    const botonVisualizar = document.getElementById('visualizarR');
-    const botonCrear = document.getElementById("crearR");
-    botonEliminar.style.pointerEvents = "none";
-    botonModificar.style.pointerEvents = "none";
-    botonVisualizar.style.pointerEvents = "none";
-    if (registrosSeleccionados.size > 0) {
-        botonEliminar.style.backgroundColor = '#64c7a0'; // Cambia el color del botón
-        botonEliminar.style.color = '#600000'; // Cambia el color de letra del botón
-        botonEliminar.style.pointerEvents = "all";
-        botonEliminar.disabled = false; // Habilita el botón
-        botonEliminar.addEventListener('mouseenter', function () {
-            botonEliminar.style.backgroundColor = "rgb(69, 168, 129)";
-        });
-        botonEliminar.addEventListener('mouseleave', function () {
-            botonEliminar.style.backgroundColor = "rgb(100, 199, 160)";
-        });
-
-        botonModificar.style.backgroundColor = '#64c7a0'; // Cambia el color del botón
-        botonModificar.style.color = 'black'; // Cambia el color de letra del botón
-        botonModificar.style.pointerEvents = "all";
-        botonModificar.style.cursor = "pointer";
-        botonModificar.disabled = false; // Habilita el botón
-        botonModificar.addEventListener('mouseenter', function () {
-            botonModificar.style.backgroundColor = "rgb(69, 168, 129)";
-        });
-        botonModificar.addEventListener('mouseleave', function () {
-            botonModificar.style.backgroundColor = "rgb(100, 199, 160)";
-        });
-
-        botonVisualizar.style.backgroundColor = '#64c7a0'; // Cambia el color del botón
-        botonVisualizar.style.color = 'black'; // Cambia el color de letra del botón
-        botonVisualizar.style.pointerEvents = "all";
-        botonVisualizar.style.cursor = "pointer";
-        botonVisualizar.disabled = false; // Habilita el botón
-        botonVisualizar.addEventListener('mouseenter', function () {
-            botonVisualizar.style.backgroundColor = "rgb(69, 168, 129)";
-        });
-        botonVisualizar.addEventListener('mouseleave', function () {
-            botonVisualizar.style.backgroundColor = "rgb(100, 199, 160)";
-        });
-
-        botonCrear.style.backgroundColor = 'rgba(100, 199, 159, 0.400)'; // Cambia el color del botón
-        botonCrear.style.color = 'rgba(0, 0, 0, 0.450)'; // Cambia el color de letra del botón
-        botonCrear.style.pointerEvents = "none";
-        botonCrear.disabled = false; // Habilita el botón
-    } else {
-        botonEliminar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
-        botonEliminar.style.color = 'rgba(121, 0, 0, 0.450)';
-        botonEliminar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
-
-        botonModificar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
-        botonModificar.style.color = 'rgba(0, 0, 0, 0.450)';
-        botonModificar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
-
-        botonVisualizar.style.backgroundColor = 'rgba(100, 199, 159, 0.400)';
-        botonVisualizar.style.color = 'rgba(0, 0, 0, 0.450)';
-        botonVisualizar.style.pointerEvents = 'none'; // Deshabilita las interacciones del botón
-
-        botonCrear.style.backgroundColor = '#64c7a0'; // Cambia el color del botón
-        botonCrear.style.color = 'black'; // Cambia el color de letra del botón
-        botonCrear.style.pointerEvents = "all";
-        botonCrear.disabled = false; // Habilita el botón
+    const botonEliminar = 'eliminarR';
+    const botonModificar = 'modificarR';
+    const botonVisualizar = 'visualizarR';
+    const botonCrear = "crearR";
+    
+    if(registrosSeleccionados.size === 0){
+        console.clear();
+        habilitarBotonPrincipal(botonCrear);
+        deshabilitarBotonEliminarR();
+        deshabilitarBotonPrincipal(botonModificar);
+        deshabilitarBotonPrincipal(botonVisualizar);
+    }else if(registrosSeleccionados.size === 1){
+        deshabilitarBotonPrincipal(botonCrear);
+        habilitarBotonPrincipal(botonModificar);
+        habilitarBotonPrincipal(botonVisualizar);
+        habilitarBotonEliminarR();
+    } else if(registrosSeleccionados.size > 1){
+        deshabilitarBotonPrincipal(botonCrear);
+        deshabilitarBotonPrincipal(botonModificar);
+        deshabilitarBotonPrincipal(botonVisualizar);
     }
 }
 

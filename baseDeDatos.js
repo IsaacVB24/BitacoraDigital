@@ -37,6 +37,40 @@ function guardarRegistro(nuevoRegistro) {
   stmt.finalize();
 }
 
+// Función para actualizar un registro por su ID
+function actualizarRegistro(idRegistro, registroModificado) {
+  const sql = `
+    UPDATE registros
+    SET nombre_usuario = ?,
+        num_solicitud = ?,
+        clave_muestra = ?,
+        fuentes_empleadas = ?,
+        duracion_analisis = ?,
+        tiempo_vida_filamentos = ?,
+        presion_camara_analisis = ?,
+        observaciones = ?,
+        fecha = ?
+    WHERE id = ?`;
+  const params = [
+    registroModificado.nombre_usuario,
+    registroModificado.num_solicitud,
+    registroModificado.clave_muestra,
+    registroModificado.fuentes_empleadas,
+    registroModificado.duracion_analisis,
+    registroModificado.tiempo_vida_filamentos,
+    registroModificado.presion_camara_analisis,
+    registroModificado.observaciones,
+    registroModificado.fecha,
+    idRegistro,
+  ];
+
+  db.run(sql, params, function (err) {
+    if (err) {
+      console.error('Error al actualizar el registro:', err.message);
+    }
+  });
+}
+
 // Función para eliminar un registro por su ID
 function eliminarRegistroPorId(registroId, callback) {
   const sql = 'DELETE FROM registros WHERE id = ?';
@@ -57,5 +91,6 @@ process.on('exit', () => {
 module.exports = {
   db,
   guardarRegistro,
+  actualizarRegistro,
   eliminarRegistroPorId,
 };

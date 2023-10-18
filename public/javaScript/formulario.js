@@ -1,5 +1,11 @@
 let estrucForm = "<div id='fila1'><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='100' placeholder='Ingrese nombre de usuario' required></div><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required></div></div><div id='fila2'><div><label for='clavMues'>Clave de muestra:</label><input type='text' name='clavMues' id='clavMues' placeholder='Ingrese máximo 15 claves separados por coma' required></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required></div></div><div id='fila3'><div><label for='durAn'>Duración del análisis:</label><input type='text' name='durAn' id='durAn' placeholder='HH : MM' required></div><div><label for='xfti'>Tiempo de vida de filamentos de rayos X (XFTI):</label><input type='text' name='xfti' id='xfti' placeholder='HH : MM' required></div><div><label for='presCam'>Presión en cámara de análisis (mbar):</label><input type='number' name='presCam' id='presCam' placeholder='Presión en mbar' required></div></div><div id='fila4'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.'></textarea></div>";
 
+let estrucFecha = '<p>Fecha: </p><p id="obtenerFecha">';
+
+function agregarFecha(){
+    document.getElementById("fechaMostrada").innerHTML = estrucFecha;
+}
+
 // Agregar funcionalidad para añadir automáticamente ":" cuando se llena el campo de tiempo
 
 function crearFormulario() {
@@ -20,6 +26,7 @@ function visFormulario() {
         coleccion[i].onmousedown = "return false";
         coleccion[i].style.cursor = "default";
     }
+    agregarFecha();
     cargarDatos();
 }
 
@@ -30,7 +37,7 @@ function visFormulario() {
 function cargarDatos() {
     // Recuperar datos del localStorage
     const datosLocalStorage = JSON.parse(localStorage.getItem('registroSeleccionado'));
-
+    // console.log(datosLocalStorage.registro);
     // Acceder a la propiedad "nombre_usuario" dentro del objeto "registro"
     const nomUs = datosLocalStorage.registro.nombre_usuario;
     const numSol = datosLocalStorage.registro.num_solicitud;
@@ -50,17 +57,7 @@ function cargarDatos() {
     document.getElementById("xfti").value = xfti;
     document.getElementById("presCam").value = presCam;
     document.getElementById("observaciones").value = observaciones;
-    
-    let rutaActual = window.location.pathname;
-    if(rutaActual == "/visualizarRegistro"){
-        document.getElementById("obtenerFecha").innerHTML = fecha;
-    }
-}
-
-function modificarFormulario() {
-    document.getElementById('formulario').innerHTML = '<form action="/modificarRegistro" method="POST">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Modificar registro</button></div></form>';
-    cargarDatos();
-    validarFormatoTiempo();
+    document.getElementById("obtenerFecha").innerHTML = fecha;
 }
 
 function validarFormatoTiempo() {
@@ -73,6 +70,7 @@ function validarFormatoTiempo() {
         if (!formatoDurAn.test(valor)) {
             alert('Formato no válido para duración del análisis. Por favor, ingrese un tiempo válido en el formato HH:MM.\nValor máximo = 999:59\nValor mínimo: 0:01');
             duracionAnalisis.value = ''; // Limpia el campo
+            document.getElementById('version').click(); // Simula un clic fuera de las etiquetas input para que no haya un bug en mostrar un mensaje de error si el formato de tiempo no es válido
         }
     });
 
@@ -85,6 +83,7 @@ function validarFormatoTiempo() {
         if (!formatoValido.test(valor)) {
             alert('Formato no válido para XFTI. Por favor, ingrese un tiempo válido en el formato HH:MM.\nValor máximo = 9999:59\nValor mínimo: 0:01');
             xfti.value = ''; // Limpia el campo
+            document.getElementById('version').click(); // Simula un clic fuera de las etiquetas input para que no haya un bug en mostrar un mensaje de error si el formato de tiempo no es válido
         }
     });
 }
