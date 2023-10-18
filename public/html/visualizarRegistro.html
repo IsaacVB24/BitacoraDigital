@@ -13,7 +13,6 @@
         <script type="text/javaScript" src="/javaScript/modificarRegistros.js"></script>
         <script type="text/javaScript" src="/javaScript/visualizarRegistro.js"></script>
         <script type="text/javaScript" src="/javaScript/formulario.js"></script>
-        <script type="text/javascript" src="/javaScript/recuperarDatos.js"></script>
     </head>
 
     <body onload="version(), crearFormulario(), visFormulario()">
@@ -27,6 +26,10 @@
                     <a href="/" style="display: flex;">
                         <img id="imgVolver" src="/imagenes/volver.png" alt="volver"><p id="volver">REGRESAR</p>
                     </a>
+                </div>
+                <div id="fecha">
+                    <p>Fecha: </p>
+                    <p id="obtenerFecha"></p>
                 </div>
 
                 <div id="formulario"></div>

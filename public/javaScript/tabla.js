@@ -1,7 +1,47 @@
 // tabla.js
 function eliminar() {
-    document.getElementById("emergente-eliminarR").innerHTML = "<div id='contModal'><p id='pregunta'>¿Desea realmente eliminar el registro seleccionado?</p><center><button class='btn-eliminar' id='cancelar' onclick='cancelar()'>CANCELAR</button><button class='btn-eliminar' id='eliminar' onclick='confirmar()'>SÍ, ELIMINARLO</button></center></div>";
-    document.getElementById("emergente-eliminarR").style.display = "block";
+    const rutaActual = window.location.pathname;
+    const emergente = document.getElementById("emergente-eliminarR");
+    emergente.innerHTML = "<div id='contModal'><p id='pregunta'>¿Desea realmente eliminar el registro seleccionado?</p><center><button class='btn-eliminar' id='cancelar' onclick='cancelar()'>CANCELAR</button><button class='btn-eliminar' id='eliminar'>SÍ, ELIMINARLO</button></center></div>";
+    const botonEliminar = document.getElementById("eliminar");
+    if(rutaActual === "/") {
+        botonEliminar.onclick = confirmar;
+    } else if(rutaActual === "/visualizarRegistro") {
+        botonEliminar.onclick = eliminarEnVis;
+    }
+    emergente.style.display = "block";
+}
+
+function eliminarEnVis() {
+    // Obtén el ID del registro seleccionado almacenado en localStorage
+    const registroSeleccionado = JSON.parse(localStorage.getItem('registroSeleccionado'));
+    //console.log(registroSeleccionado);
+    // Si hay un registro seleccionado, procede a eliminarlo
+    if (registroSeleccionado) {
+        const registroId = registroSeleccionado.registro.id;
+        //console.log(registroId);
+        const url = `/eliminarRegistro/${registroId}`; // Construye la URL con el ID del registro
+
+        fetch(url, {
+            method: 'DELETE', // Usa el método HTTP DELETE
+        })
+        .then(response => {
+            if (response.ok) {
+                // El servidor respondió correctamente, muestra un alert informativo
+                alert('Registro eliminado con éxito');
+                // Redirige a la página principal
+                window.location.href = '/';
+            } else {
+                // El servidor respondió con un error, puedes manejarlo de la manera que consideres adecuada.
+                console.error('Error al eliminar el registro:', response.status);
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
+    } else {
+        console.error('No hay registro seleccionado para eliminar.');
+    }
 }
 
 function seleccionarTodosLosRegistros() {
@@ -168,6 +208,7 @@ function mostrarRegistros() {
                     <td id='fecha'>${registro.fecha}</td>
                     <td id='clave'>${registro.clave_muestra}</td>
                     <td id='fuentes'>${registro.fuentes_empleadas}</td>
+                    <td id="duracionAnalisis">${registro.duracion_analisis}</td>
                 `;
                 tablaRegistros.appendChild(fila);
             });
@@ -176,7 +217,7 @@ function mostrarRegistros() {
             if (data.length === 0) {
                 const sinRegistro = document.createElement('tr');
                 sinRegistro.innerHTML = `
-                    <td colspan="6"><center id="sinRegistro">Aún no hay registros, <a href="/crearRegistro">cree uno</a> para empezar o importe datos de alguna ruta.</center></th>`;
+                    <td colspan="7"><center id="sinRegistro">Aún no hay registros, <a href="/crearRegistro">cree uno</a> para empezar o importe datos de alguna ruta.</center></th>`;
                 tablaRegistros.appendChild(sinRegistro);
             }
 

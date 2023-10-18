@@ -84,6 +84,20 @@ router.post('/eliminarRegistros', (req, res) => {
     });
 });
 
+// Ruta para eliminar un registro por su ID
+router.delete('/eliminarRegistro/:idRegistro', (req, res) => {
+    const registroId = req.params.idRegistro;
+
+    baseDeDatos.eliminarRegistroPorId(registroId, (error) => {
+        if (error) {
+            console.error('Error al eliminar el registro:', error);
+            res.status(500).json({ success: false, message: 'Error al eliminar el registro' });
+        } else {
+            res.status(200).json({ success: true, message: 'Registro eliminado con éxito' });
+        }
+    });
+});
+
 // Ruta para obtener los detalles de un registro por su ID
 router.get('/obtenerRegistro/:id', (req, res) => {
     const registroId = req.params.id;

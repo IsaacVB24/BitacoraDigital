@@ -1,4 +1,6 @@
-let estrucForm = "<div id='fila1'><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='20' placeholder='Ingrese nombre de usuario' required></div><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required></div></div><div id='fila2'><div><label for='clavMues'>Clave de muestra:</label><input type='text' name='clavMues' id='clavMues' placeholder='Ingrese máximo 15 claves separados por coma' required></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required></div></div><div id='fila3'><div><label for='durAn'>Duración del análisis:</label><input type='text' name='durAn' id='durAn' placeholder='HH : MM' required></div><div><label for='xfti'>Tiempo de vida de filamentos de rayos X (XFTI):</label><input type='text' name='xfti' id='xfti' placeholder='HH : MM' required></div><div><label for='presCam'>Presión en cámara de análisis (mbar):</label><input type='number' name='presCam' id='presCam' placeholder='Presión en mbar' required></div></div><div id='fila4'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.'></textarea></div>";
+let estrucForm = "<div id='fila1'><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='100' placeholder='Ingrese nombre de usuario' required></div><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required></div></div><div id='fila2'><div><label for='clavMues'>Clave de muestra:</label><input type='text' name='clavMues' id='clavMues' placeholder='Ingrese máximo 15 claves separados por coma' required></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required></div></div><div id='fila3'><div><label for='durAn'>Duración del análisis:</label><input type='text' name='durAn' id='durAn' placeholder='HH : MM' required></div><div><label for='xfti'>Tiempo de vida de filamentos de rayos X (XFTI):</label><input type='text' name='xfti' id='xfti' placeholder='HH : MM' required></div><div><label for='presCam'>Presión en cámara de análisis (mbar):</label><input type='number' name='presCam' id='presCam' placeholder='Presión en mbar' required></div></div><div id='fila4'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.'></textarea></div>";
+
+// Agregar funcionalidad para añadir automáticamente ":" cuando se llena el campo de tiempo
 
 function crearFormulario() {
     document.getElementById('formulario').innerHTML = '<form action="/crearRegistro" method="POST">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Crear nuevo registro</button></div></form>';
@@ -38,6 +40,7 @@ function cargarDatos() {
     const xfti = datosLocalStorage.registro.tiempo_vida_filamentos;
     const presCam = datosLocalStorage.registro.presion_camara_analisis;
     const observaciones = datosLocalStorage.registro.observaciones;
+    const fecha = datosLocalStorage.registro.fecha;
 
     document.getElementById("nomUs").value = nomUs;
     document.getElementById("numSol").value = numSol;
@@ -47,6 +50,11 @@ function cargarDatos() {
     document.getElementById("xfti").value = xfti;
     document.getElementById("presCam").value = presCam;
     document.getElementById("observaciones").value = observaciones;
+    
+    let rutaActual = window.location.pathname;
+    if(rutaActual == "/visualizarRegistro"){
+        document.getElementById("obtenerFecha").innerHTML = fecha;
+    }
 }
 
 function modificarFormulario() {
