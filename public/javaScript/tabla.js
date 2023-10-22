@@ -1,10 +1,22 @@
 // tabla.js
+const rutaActual = window.location.pathname;
+
 function eliminar() {
-    const rutaActual = window.location.pathname;
     const emergente = document.getElementById("emergente-eliminarR");
     emergente.innerHTML = "<div id='contModal'><p id='pregunta'>¿Desea realmente eliminar el registro seleccionado?</p><center><button class='btn-eliminar' id='cancelar' onclick='cancelar()'>CANCELAR</button><button class='btn-eliminar' id='eliminar'>SÍ, ELIMINARLO</button></center></div>";
     const botonEliminar = document.getElementById("eliminar");
+    let numeroCheckboxesSeleccionados = 0; // Variable para almacenar el número de checkboxes seleccionados
+
     if(rutaActual === "/") {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                numeroCheckboxesSeleccionados++;
+            }
+        });
+        if(numeroCheckboxesSeleccionados > 1){
+            emergente.innerHTML = "<div id='contModal'><p id='pregunta'>¿Desea realmente eliminar " + numeroCheckboxesSeleccionados + " registros seleccionados?</p><center><button class='btn-eliminar' id='cancelar' onclick='cancelar()'>CANCELAR</button><button class='btn-eliminar' id='eliminar'>SÍ, ELIMINARLOS</button></center></div>";
+        }
         botonEliminar.onclick = confirmar;
     } else if(rutaActual === "/visualizarRegistro") {
         botonEliminar.onclick = eliminarEnVis;
@@ -38,30 +50,6 @@ function deshabilitarBotonEliminarR(){
     botonEliminar.style.color = 'rgba(121, 0, 0, 0.450)';
     botonEliminar.style.pointerEvents = 'none';
 }
-
-function handleCheckboxChange(event) {
-    const checkbox = event.target;
-    const registroId = checkbox.getAttribute('data-registro-id');
-    const seleccionarTodo = document.getElementById("seleccionarTodo");
-  
-    if (checkbox.checked) {
-      registrosSeleccionados.add(registroId);
-  
-      // Cambia la URL para que coincida con el parámetro esperado en la ruta
-      fetch(`/obtenerRegistro/${registroId}`)
-        .then(response => response.json())
-        .then(data => {
-          // Almacena los valores en localStorage
-          localStorage.setItem('registroSeleccionado', JSON.stringify(data));
-  
-          // Muestra los valores recuperados en la consola
-          //console.log('Datos del registro seleccionado:', data);
-        })
-        .catch(error => console.error('Error al obtener datos del registro:', error));
-    } else {
-      registrosSeleccionados.delete(registroId);
-    }
-  }  
 
 function seleccionarTodosLosRegistros() {
     const seleccionarTodo = document.getElementById("seleccionarTodo");
@@ -105,6 +93,22 @@ function cancelar() {
 
 // Variable para almacenar los IDs de los registros seleccionados
 const registrosSeleccionados = new Set();
+
+document.addEventListener("DOMContentLoaded", function () {
+    const table = document.getElementById("tablaMain");
+    if(rutaActual === "/"){
+        table.addEventListener("click", function (event) {
+            const target = event.target;
+            if (target.tagName === "TD") {
+                const checkbox = target.parentElement.querySelector("input[type='checkbox']");
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    handleCheckboxChange({ target: checkbox }); // Llama a handleCheckboxChange con el checkbox como objetivo
+                }
+            }
+        });
+    }
+});
 
 // Función para manejar el cambio en los checkboxes
 function handleCheckboxChange(event) {
