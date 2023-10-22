@@ -15,7 +15,8 @@ function eliminar() {
             }
         });
         if(numeroCheckboxesSeleccionados > 1){
-            emergente.innerHTML = "<div id='contModal'><p id='pregunta'>¿Desea realmente eliminar " + numeroCheckboxesSeleccionados + " registros seleccionados?</p><center><button class='btn-eliminar' id='cancelar' onclick='cancelar()'>CANCELAR</button><button class='btn-eliminar' id='eliminar'>SÍ, ELIMINARLOS</button></center></div>";
+            document.getElementById("pregunta").innerHTML = "¿Desea realmente eliminar " + numeroCheckboxesSeleccionados + " registros seleccionados?";
+            document.getElementById("eliminar").innerHTML = "SÍ, ELIMINARLOS";
         }
         botonEliminar.onclick = confirmar;
     } else if(rutaActual === "/visualizarRegistro") {

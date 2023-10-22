@@ -1,5 +1,5 @@
 function version(){
-    document.getElementById("contPie").innerHTML = "<p id='infoPie' onclick='redirigir()'>@ 2023 Copyright Isaac Victoria Benavides </p><p id='version'>Versión 1.4.1</p>";
+    document.getElementById("contPie").innerHTML = "<p id='infoPie' onclick='redirigir()'>@ 2023 Copyright Isaac Victoria Benavides </p><p id='version'>Versión 1.4.1.1</p>";
 }
 
 function redirigir(){

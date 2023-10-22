@@ -51,3 +51,7 @@ td:first-child {
 tr:hover {
     background-color: #ddd;
 }
+
+input[type="checkbox"]:hover{
+    cursor: pointer;
+}
