@@ -15,7 +15,7 @@ db.serialize(() => {
     'fuentes_empleadas TEXT,' +
     'duracion_analisis TEXT,' +
     'tiempo_vida_filamentos TEXT,' +
-    'presion_camara_analisis NUMERIC,' +
+    'presion_camara_analisis TEXT,' +
     'observaciones TEXT,' +
     'fecha TEXT)');
 });
