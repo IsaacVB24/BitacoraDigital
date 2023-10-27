@@ -25,4 +25,6 @@ function modificarFormulario() {
       console.error('No se encontró un idRegistro válido en localStorage.');
       // Puedes redirigir al usuario o mostrar un mensaje de error, según tus necesidades.
     }
+    document.getElementById("botonMas").onclick = botonMas;
+    document.getElementById("claveList").style.display = "none";
 }  

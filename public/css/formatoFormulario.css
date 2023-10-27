@@ -69,3 +69,35 @@ button{
 #btn-crearR{
     cursor: pointer;
 }
+#formulario div div #clavMues {
+    width: calc(100% - 40px); /* Reduce el ancho del input al 70%. Puedes ajustar este valor según tus necesidades. */
+}
+#formulario div div .botonMas {
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 5px;
+    width: 30px;
+    height: 30px; /* Iguala la altura al input. */
+    border-radius: 50px;
+    background-color: #48ce6a;
+}
+ul{
+    margin-top: 5px;
+    padding: 5px;
+    width: 25%;
+    position: absolute;
+    white-space: nowrap; /* Evita que los elementos li se rompan en múltiples líneas */
+    overflow: hidden; /* Oculta el contenido adicional si es necesario */
+    background-color: white;
+    border: 1px solid black;
+}
+/* Estilos para los botones "Eliminar" en la lista de claves */
+ul li button {
+    float: right; /* Hace que los botones se alineen a la derecha */
+    margin-left: 5px; /* Agrega un espacio entre los botones */
+    height: 20px;
+}
+li{
+    width: 100%;
+    height: 20px;
+}
