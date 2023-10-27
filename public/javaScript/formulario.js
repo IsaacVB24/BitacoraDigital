@@ -1,10 +1,10 @@
-let estrucForm = "<div id='fila1'><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='100' placeholder='Ingrese nombre de usuario' required></div><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required></div></div><div id='fila2'><div><label for='clavMues'>Clave de muestra:</label><input type='text' name='clavMues' id='clavMues' maxlength='15' placeholder='Agregue claves y presione el botón +'><button class='botonMas' id='botonMas' type='button'>+</button><ul id='claveList'></ul></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required></div></div><div id='fila3'><div><label for='durAn'>Duración del análisis:</label><input type='text' name='durAn' id='durAn' placeholder='HH : MM' required></div><div><label for='xfti'>Tiempo de vida de filamentos de rayos X (XFTI):</label><input type='text' name='xfti' id='xfti' placeholder='HH : MM' required></div><div><label for='presCam'>Presión en cámara de análisis (mbar):</label><input type='text' name='presCam' id='presCam' placeholder='Presión en mbar' required></div></div><div id='fila4'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.'></textarea></div>";
+let estrucForm = "<div id='fila1'><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='100' placeholder='Ingrese nombre de usuario' required></div><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required></div></div><div id='fila2'><div><label for='clavMues'>Clave de muestra:</label><input type='text' name='clavMues' id='clavMues' maxlength='15' placeholder='Agregue claves y presione el botón +' autocomplete='off'><button class='botonMas' id='botonMas' type='button'>+</button><ul id='claveList'></ul></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required></div></div><div id='fila3'><div><label for='durAn'>Duración del análisis:</label><input type='text' name='durAn' id='durAn' placeholder='HH : MM' required></div><div><label for='xfti'>Tiempo de vida de filamentos de rayos X (XFTI):</label><input type='text' name='xfti' id='xfti' placeholder='HH : MM' required></div><div><label for='presCam'>Presión en cámara de análisis (mbar):</label><input type='text' name='presCam' id='presCam' placeholder='Presión en mbar' required></div></div><div id='fila4'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.'></textarea></div>";
 
 let estrucFecha = '<p>Fecha:&nbsp</p><p id="obtenerFecha">';
 
 const clavesMuestra = [];
 
-function botonMas() {  
+function botonMas(arreglo) {  
     const claveInput = document.getElementById('clavMues');
     const claveList = document.getElementById('claveList');
 
@@ -13,17 +13,15 @@ function botonMas() {
     claveInput.value = '';
 
     // Verifica si se ha ingresado algo en el campo
-    if (claveValue) { 
-        console.log("Clave value: " + claveValue);      
+    if (claveValue) {     
         const ingresarAlArreglo = claveValue;
-        clavesMuestra.push(ingresarAlArreglo);
-        const indiceClave = clavesMuestra.indexOf(ingresarAlArreglo);
+        arreglo.push(ingresarAlArreglo);
+        const indiceClave = arreglo.indexOf(ingresarAlArreglo);
         claveList.style.display = "block";
         
         // Crea un nuevo elemento de lista
         const listItem = document.createElement('li');
         listItem.textContent = ingresarAlArreglo;
-        console.log(ingresarAlArreglo);
 
         // Crea un botón de eliminación
         const deleteButton = document.createElement('button');
@@ -32,9 +30,8 @@ function botonMas() {
         // Agrega un controlador de eventos al botón de eliminación
         deleteButton.addEventListener('click', function () {
             claveList.removeChild(listItem);
-            clavesMuestra.splice(indiceClave, 1);
-            console.log(clavesMuestra);
-            clavesMuestra.length === 0 ? document.getElementById("claveList").style.display = "none" : null;
+            arreglo.splice(indiceClave, 1);
+            arreglo.length === 0 ? document.getElementById("claveList").style.display = "none" : null;
         });
 
         // Agrega el botón de eliminación al elemento de lista
@@ -59,6 +56,7 @@ function botonMas() {
         
         // Vuelve a enfocar el campo de entrada clavMues
         claveInput.focus();
+        clavesPierdeFocus();
     }
 }
 
@@ -67,7 +65,13 @@ function agregarFecha(){
 }
 
 function validarClaves() {
-    if (clavesMuestra.length === 0) {
+    let arreglo = [];
+    if(rutaActual === "/crearRegistro"){
+        arreglo = clavesMuestra;
+    } else if(rutaActual === "/modificarRegistro"){
+        arreglo = clavesAModificar;
+    }
+    if (arreglo.length === 0) {
         alert("Ingrese al menos una clave de muestra");
         document.getElementById('clavMues').focus(); // Establece el foco en el campo "clavMues"
         return false; // Evita el envío del formulario
@@ -77,6 +81,11 @@ function validarClaves() {
 }
 
 function clavesPierdeFocus() {
+    if(rutaActual === "/crearRegistro"){
+        arreglo = clavesMuestra;
+    } else if(rutaActual === "/modificarRegistro"){
+        arreglo = clavesAModificar;
+    }
     const inputs = document.querySelectorAll('input'); // Obtener todos los inputs
 
     const clavMuesInput = document.getElementById('clavMues');
@@ -87,7 +96,7 @@ function clavesPierdeFocus() {
             input.addEventListener('focus', function() {
               if (input.id !== 'clavMues') {
                 // Este input tiene foco y no es el input con id "in2"
-                clavMuesInput.value = clavesMuestra;
+                clavMuesInput.value = arreglo;
                 claveList.style.display = 'none'; // Oculta claveList cuando el input pierde el foco
               }
             });
@@ -96,7 +105,7 @@ function clavesPierdeFocus() {
 
     clavMuesInput.addEventListener('focus', function () {
         clavMuesInput.value = '';
-        if (clavesMuestra.length > 0) {
+        if (arreglo.length > 0) {
             claveList.style.display = 'block'; // Muestra claveList si hay elementos en el arreglo
         } else {
             claveList.style.display = 'none'; // Oculta claveList si el arreglo está vacío
@@ -104,9 +113,20 @@ function clavesPierdeFocus() {
     });
 }
 
+function botonSubmit(){
+    const clavMuesInput = document.getElementById('clavMues');
+    const claveList = document.getElementById('claveList');
+
+    clavMuesInput.blur();
+    clavMuesInput.value = clavesMuestra;
+    claveList.style.display = 'none'; // Oculta claveList cuando el input pierde el foco
+}
+
 function crearFormulario() {
-    document.getElementById('formulario').innerHTML = '<form action="/crearRegistro" method="POST" onsubmit="return validarClaves()">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Crear nuevo registro</button></form>';
-    document.getElementById("botonMas").onclick = botonMas;
+    document.getElementById('formulario').innerHTML = '<form action="/crearRegistro" method="POST" onsubmit="return validarClaves(clavesMuestra)">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit" onclick="botonSubmit()">Crear nuevo registro</button></form>';
+    document.getElementById("botonMas").onclick = function() {
+        botonMas(clavesMuestra);
+    };
     document.getElementById("claveList").style.display = "none";
     clavesPierdeFocus();
     validarFormatoTiempo();
@@ -153,6 +173,7 @@ function cargarDatos() {
 
     document.getElementById("nomUs").value = nomUs;
     document.getElementById("numSol").value = numSol;
+    if(rutaActual === "/modificarRegistro") clavesRecibidas = clavMues;
     document.getElementById("clavMues").value = clavMues;
     document.getElementById("fuenEmpl").value = fuenEmpl;
     document.getElementById("durAn").value = durAn;
