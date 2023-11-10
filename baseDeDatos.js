@@ -17,12 +17,15 @@ db.serialize(() => {
     'tiempo_vida_filamentos TEXT,' +
     'presion_camara_analisis TEXT,' +
     'observaciones TEXT,' +
-    'fecha TEXT)');
+    'fecha TEXT,' +
+    'diametro_haz TEXT,' +
+    'precamara TEXT,' +
+    'camara TEXT)');
 });
 
 // Función para guardar un nuevo registro en la base de datos
 function guardarRegistro(nuevoRegistro) {
-  const stmt = db.prepare('INSERT INTO registros (nombre_usuario, num_solicitud, clave_muestra, fuentes_empleadas, duracion_analisis, tiempo_vida_filamentos, presion_camara_analisis, observaciones, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+  const stmt = db.prepare('INSERT INTO registros (nombre_usuario, num_solicitud, clave_muestra, fuentes_empleadas, duracion_analisis, tiempo_vida_filamentos, presion_camara_analisis, observaciones, fecha, diametro_haz, precamara, camara) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
   stmt.run(
     nuevoRegistro.nombre_usuario,
     nuevoRegistro.num_solicitud,
@@ -32,7 +35,10 @@ function guardarRegistro(nuevoRegistro) {
     nuevoRegistro.tiempo_vida_filamentos,
     nuevoRegistro.presion_camara_analisis,
     nuevoRegistro.observaciones,
-    nuevoRegistro.fecha
+    nuevoRegistro.fecha,
+    nuevoRegistro.diametro_haz,
+    nuevoRegistro.precamara,
+    nuevoRegistro.camara
   );
   stmt.finalize();
 }
@@ -49,7 +55,10 @@ function actualizarRegistro(idRegistro, registroModificado) {
         tiempo_vida_filamentos = ?,
         presion_camara_analisis = ?,
         observaciones = ?,
-        fecha = ?
+        fecha = ?,
+        diametro_haz = ?,
+        precamara = ?,
+        camara = ?
     WHERE id = ?`;
   const params = [
     registroModificado.nombre_usuario,
@@ -61,6 +70,9 @@ function actualizarRegistro(idRegistro, registroModificado) {
     registroModificado.presion_camara_analisis,
     registroModificado.observaciones,
     registroModificado.fecha,
+    registroModificado.diametro_haz,
+    registroModificado.precamara,
+    registroModificado.camara,
     idRegistro,
   ];
 

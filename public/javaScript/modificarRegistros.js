@@ -41,9 +41,8 @@ function modificarFormulario() {
     clavesAModificar = clavesRecibidas.split(',');
     crearListaDeMuestras(clavesAModificar);
     mostrarLista();
-    ocultarLista();
     validarFormatoTiempo();
-    atencionFocus();
+    //atencionFocus();
     document.getElementById("botonMas").onclick = function() {
       botonMas(clavesAModificar);
     };
@@ -72,13 +71,14 @@ function validarModificacion(arreglo){
   return true
 }
 
+//Esta función se deja de usar desde la versión 1.4.4 por requerimiento de usuario
 function atencionFocus(){
   const inputClaves = document.getElementById("clavMues");
   inputClaves.addEventListener("focus", mostrarLista);
   const inputs = document.querySelectorAll('input'); // Obtener todos los inputs
 
-    const clavMuesInput = document.getElementById('clavMues');
-    const claveList = document.getElementById('claveList');
+  const clavMuesInput = document.getElementById('clavMues');
+  //const claveList = document.getElementById('claveList');
 
     clavMuesInput.addEventListener('blur', function () {
         inputs.forEach(input => {
@@ -136,7 +136,7 @@ function crearListaDeMuestras(claves){
     listItem.style.top = newElementPosition;
 
     // Asegura que la lista tenga una altura máxima de 50px y habilite el scroll si es necesario
-    claveList.style.maxHeight = '50px';
+    claveList.style.maxHeight = '90%';
     claveList.style.overflowY = 'auto';
   }
 }

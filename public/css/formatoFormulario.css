@@ -1,78 +1,114 @@
-/*
-input[type=text]{
-    cursor: text;
-    padding: 7px 10px;
-    width: 100%;
-    border-radius: 5px;
+#nada{
+    color: rgb(245, 232, 153); /*Input focus*/
+    color: #48ce6a; /*Botón más*/
 }
-input[type=text]:focus{
-    background-color: rgb(246, 232, 153);
-}
-button{
-    cursor: pointer;
-}
-*/
 ::placeholder{
     justify-content: center;
     text-align: center;
 }
-#formulario{
-    margin: 10px;
-    padding: 0 40px;
-}
-#formulario div div label, #observaciones{
-    display: flex;
-}
-#formulario div div input, #observaciones{
+input:hover, textarea:hover{
     cursor: text;
-    border-radius: 10px;
-    margin-left: 5px;
-    border: 1px solid #000000;
 }
-#formulario div div input:focus, #observaciones:focus{
+input:focus, textarea:focus{
     background-color: rgb(245, 232, 153);
 }
-/* (246, 232, 153) */
-#fila1 input, #fila2 input{
+input, textarea{
+    border-radius: 10px;
     width: 100%;
-    height: 30px;
-    padding: 15px 7px;
+    border: 1px solid #000000;
 }
-#fila3 input{
+input{
+    height: 30px;
     padding: 2px 7px;
-    display: flexbox;
     text-align: center;
 }
-#hdurAn, #mdurAn, #hxfti, #mxfti{ 
-    width: 40%;
+textarea{
+    padding: 2px 10px;
+    text-align: justify;
 }
-#presCam{
-    width: 80%;
+label{
+    display: block;
 }
-#formulario div{
-    margin: auto;
-    padding: 5px;
-}
-#observaciones{
-    margin: auto;
-    width: 100%;
-    resize: none;
-    padding: 10px;
-}
-#fila1, #fila2, #fila3{
-    display: flex;
-}
-#formulario div div{
-    width: 80%;
-    margin: 15px;
-}
-#btn-crearR{
+button{
     cursor: pointer;
 }
-#formulario div div #clavMues {
-    width: calc(100% - 40px); /* Reduce el ancho del input al 70%. Puedes ajustar este valor según tus necesidades. */
+#formulario{
+    height: 70%;
+    margin: 10px 0px;
+    padding: 10px;
 }
-#formulario div div .botonMas {
+label, input, textarea, li, li button{
+    font-size: medium;
+}
+ul{
+    border-radius: 5px;
+}
+ul input{
+    height: fit-content;
+    width: 16ch;
+}
+li{
+    position: block;
+    background-color: white;
+    padding: 2px 1px;
+}
+/* Estilos para los botones "Eliminar" en la lista de claves */
+ul li button {
+    float: right; /* Hace que los botones se alineen a la derecha */
+    margin-left: 5px; /* Agrega un espacio entre los botones */
+}
+#fila1{
+    height: 10%;
+}
+#fila1 > div, #fila4 > div {
+    flex: 1; /* Hace que los div ocupen un tercio del ancho disponible */
+    justify-content: center;
+}
+#fila1 div:first-of-type input{
+    width: 30ch;
+}
+#fila1 div input{
+    width: 50ch;
+}
+#fila2{
+    height: 55%;
+}
+#fila2, #fila4{
+    justify-content: space-between; /* Esto centrará horizontalmente los divs y distribuirá el espacio entre ellos */
+}
+#fila2 input, #fila4 input{
+    width: 25ch;
+}
+#fila3{
+    flex-direction: column;
+    height: calc(20% + 5px);
+}
+#fila3 label{
+    text-align: left;
+}
+#fila4{
+    height: 10%;
+}
+#observaciones{
+    resize: none;
+}
+/*
+#fila1, #fila2{
+    border-bottom: 1px dashed black;
+}
+*/
+.filas{
+    display: flex;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.filas div{
+    margin: 0px 25px;
+}
+.filas div input{
+    margin-left: 10px;
+}
+.botonMas {
     cursor: pointer;
     display: inline-block;
     margin-left: 5px;
@@ -80,24 +116,4 @@ button{
     height: 30px; /* Iguala la altura al input. */
     border-radius: 50px;
     background-color: #48ce6a;
-}
-ul{
-    margin-top: 5px;
-    padding: 5px;
-    width: 25%;
-    position: absolute;
-    white-space: nowrap; /* Evita que los elementos li se rompan en múltiples líneas */
-    overflow: hidden; /* Oculta el contenido adicional si es necesario */
-    background-color: white;
-    border: 1px solid black;
-}
-/* Estilos para los botones "Eliminar" en la lista de claves */
-ul li button {
-    float: right; /* Hace que los botones se alineen a la derecha */
-    margin-left: 5px; /* Agrega un espacio entre los botones */
-    height: 20px;
-}
-li{
-    width: 100%;
-    height: 20px;
 }

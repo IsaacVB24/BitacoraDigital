@@ -34,6 +34,9 @@ router.post('/crearRegistro', (req, res) => {
         presion_camara_analisis: req.body.presCam,
         observaciones: req.body.observaciones,
         fecha: new Date().toLocaleDateString(),     // Obtener la fecha del sistema
+        diametro_haz: req.body.diamHaz,
+        precamara: req.body.precamara,
+        camara: req.body.camAnalisis,
       };
 
     baseDeDatos.guardarRegistro(nuevoRegistro); // Llama a la función para guardar el registro
@@ -51,6 +54,9 @@ router.post('/modificarRegistro', (req, res) => {
         tiempo_vida_filamentos: `${req.body.xfti}`,
         presion_camara_analisis: req.body.presCam,
         observaciones: req.body.observaciones,
+        diametro_haz: req.body.diamHaz,
+        precamara: req.body.precamara,
+        camara: req.body.camAnalisis,
     };
 
     // Recupera la fecha original del registro desde la base de datos

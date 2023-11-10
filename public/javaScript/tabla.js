@@ -53,7 +53,7 @@ function deshabilitarBotonEliminarR(){
 }
 
 function seleccionarTodosLosRegistros() {
-    const seleccionarTodo = document.getElementById("seleccionarTodo");
+    //const seleccionarTodo = document.getElementById("seleccionarTodo");
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     let alMenosUnoSeleccionado = false;
 
@@ -127,7 +127,7 @@ function handleCheckboxChange(event) {
             localStorage.setItem('registroSeleccionado', JSON.stringify(data));
 
             // Muestra los valores recuperados en la consola
-            //console.log('Datos del registro seleccionado:', data);
+            console.log('Datos del registro seleccionado:', data);
         })
         .catch(error => console.error('Error al obtener datos del registro:', error));
     } else {
@@ -174,7 +174,7 @@ function mostrarRegistros() {
         .then(response => response.json())
         .then(data => {
             const tablaRegistros = document.getElementById('tablaRegistros');
-            const botonEliminar = document.getElementById('eliminarR'); // Obtén el botón de eliminar
+            //const botonEliminar = document.getElementById('eliminarR'); // Obtén el botón de eliminar
             // Limpia cualquier contenido previo en la tabla
             tablaRegistros.innerHTML = '';
 
@@ -183,8 +183,8 @@ function mostrarRegistros() {
                 const fila = document.createElement('tr');
                 fila.innerHTML = `
                     <td id='encSeleccionar'><input type="checkbox" data-registro-id="${registro.id}" onchange="handleCheckboxChange(event)"></td>
-                    <td id='usuario'>${registro.nombre_usuario}</td>
                     <td id='solicitud'>${registro.num_solicitud}</td>
+                    <td id='usuario'>${registro.nombre_usuario}</td>
                     <td id='fecha'>${registro.fecha}</td>
                     <td id='clave'>${registro.clave_muestra}</td>
                     <td id='fuentes'>${registro.fuentes_empleadas}</td>
