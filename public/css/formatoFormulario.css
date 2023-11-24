@@ -37,11 +37,20 @@ button{
     margin: 10px 0px;
     padding: 10px;
 }
-label, input, textarea, li, li button{
+label, input, textarea, li, li button, span{
     font-size: medium;
 }
 ul{
     border-radius: 5px;
+    margin: 0px 5px;
+}
+/* Ajusta el contenido de los elementos de la lista en un solo renglón */
+ul, li, li p, button{
+    display: flex;
+}
+li p{
+    margin: 0 auto;
+  display: block;
 }
 ul input{
     height: fit-content;
@@ -51,6 +60,7 @@ li{
     position: block;
     background-color: white;
     padding: 2px 1px;
+    justify-content: center;
 }
 /* Estilos para los botones "Eliminar" en la lista de claves */
 ul li button {
@@ -97,6 +107,16 @@ ul li button {
     border-bottom: 1px dashed black;
 }
 */
+#fila2 div{
+    width: 100%;
+    margin: 0;
+}
+#divDurAn{
+    margin-right: 0;
+}
+#divXFTI{
+    margin-left: 0;
+}
 .filas{
     display: flex;
     margin-bottom: 15px;

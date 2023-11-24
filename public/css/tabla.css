@@ -55,3 +55,12 @@ tr:hover {
 input[type="checkbox"]:hover{
     cursor: pointer;
 }
+.truncate{
+    white-space: nowrap;       /* Evitar saltos de línea */
+    overflow: hidden;          /* Ocultar el contenido que se desborda */
+    text-overflow: ellipsis;   /* Mostrar puntos suspensivos (...) cuando se corta el texto */
+    max-width: 100px;           /* Establecer el ancho máximo para la columna */
+}
+td{
+    font-size: medium;
+}

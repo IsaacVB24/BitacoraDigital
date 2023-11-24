@@ -127,7 +127,7 @@ function handleCheckboxChange(event) {
             localStorage.setItem('registroSeleccionado', JSON.stringify(data));
 
             // Muestra los valores recuperados en la consola
-            console.log('Datos del registro seleccionado:', data);
+            //console.log('Datos del registro seleccionado:', data);
         })
         .catch(error => console.error('Error al obtener datos del registro:', error));
     } else {
@@ -186,9 +186,9 @@ function mostrarRegistros() {
                     <td id='solicitud'>${registro.num_solicitud}</td>
                     <td id='usuario'>${registro.nombre_usuario}</td>
                     <td id='fecha'>${registro.fecha}</td>
-                    <td id='clave'>${registro.clave_muestra}</td>
-                    <td id='fuentes'>${registro.fuentes_empleadas}</td>
-                    <td id="duracionAnalisis">${registro.duracion_analisis}</td>
+                    <td class='truncate' id='clave'>${registro.clave_muestra}</td>
+                    <td class='truncate' id='fuentes'>${registro.fuentes_empleadas}</td>
+                    <td class='truncate' id="duracionAnalisis">${registro.duracion_analisis}</td>
                 `;
                 tablaRegistros.appendChild(fila);
             });
