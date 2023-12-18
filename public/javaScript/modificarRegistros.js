@@ -10,7 +10,7 @@ function modificarFormulario() {
   const idRegistro = datosLocalStorage.registro.id;
 
   clavesAModificar = datosLocalStorage.registro.clave_muestra;
-  duracionAnalisisAModificar = duracionAnalisisAModificar + ',' + datosLocalStorage.registro.duracion_analisis;
+  duracionAnalisisAModificar = datosLocalStorage.registro.duracion_analisis;
   xftiAModificar = datosLocalStorage.registro.tiempo_vida_filamentos;
   presionAModificar = datosLocalStorage.registro.presion_camara_analisis;
 
@@ -30,10 +30,7 @@ function modificarFormulario() {
     `;
 
     formulario.addEventListener('submit', function (event) {
-      if (!clavesAModificar || clavesAModificar.length === 0 || validarClaves() == false) {
-        event.preventDefault(); // Evita el envío del formulario
-        inputClaves.focus();
-      }
+      if(validarClaves() == false) event.preventDefault();
     });
 
     // Agrega el formulario al elemento con id "formulario"

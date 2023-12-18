@@ -93,6 +93,7 @@ function mostrarLista(arreglo, listaUl, numeroColumnas){
         const botonModificar = document.createElement('button');
         botonModificar.textContent = "M";
         botonModificar.addEventListener('click', function (event){
+            event.preventDefault();
             modificarElemento(arreglo, i, parrafo, event);
         });
 
@@ -114,13 +115,13 @@ function mostrarLista(arreglo, listaUl, numeroColumnas){
 }
 
 function modificarElemento(arreglo, indice, parrafo, event){
-    const nuevoContenido = prompt('Ingrese el nuevo contenido:');
+    const nuevoContenido = prompt('Ingrese el nuevo contenido:', parrafo.textContent);
     const input = parrafo.parentNode.parentNode.previousElementSibling.previousElementSibling;
     if(nuevoContenido !== null){
+        arreglo[indice] = nuevoContenido;
+        parrafo.textContent = nuevoContenido;
         if(arreglo === duracionAnalisis || arreglo === xfti){
             if(validarTiempoModificado(nuevoContenido, arreglo)){
-                arreglo[indice] = nuevoContenido;
-                parrafo.textContent = nuevoContenido;
                 event.preventDefault();
                 input.focus();
             } else{
@@ -190,22 +191,22 @@ function validarClaves() {
         arreglo_xfti = xftiAModificar;
         arreglo_presion = presionAModificar;
     }
-    if (arreglo_claves.length === 0) {
+    if (arreglo_claves.length < 1) {
         alert("Ingrese al menos una clave de muestra, asegúrese de dar clic en su correspondiente botón '+'.");
         clavMuesInput.focus(); // Establece el foco en el campo "clavMues"
         return false; // Evita el envío del formulario
     }
-    if (arreglo_duracion.length === 0) {
+    if (arreglo_duracion.length < 2) {
         alert("Ingrese al menos un valor de duración del análisis, asegúrese de dar clic en su correspondiente botón '+'.");
         durAnInput.focus(); // Establece el foco en el campo "durAn"
         return false; // Evita el envío del formulario
     }
-    if (arreglo_xfti.length === 0) {
+    if (arreglo_xfti.length < 1) {
         alert("Ingrese al menos un valor de tiempo de vida de filamentos de rayos X, asegúrese de dar clic en su correspondiente botón '+'.");
         xftiInput.focus(); // Establece el foco en el campo "xfti"
         return false; // Evita el envío del formulario
     }
-    if (arreglo_presion.length === 0) {
+    if (arreglo_presion.length < 1) {
         alert("Ingrese al menos un valor de presión en cámara de análisis, asegúrese de dar clic en su correspondiente botón '+'.");
         presCamInput.focus(); // Establece el foco en el campo "presCam"
         return false; // Evita el envío del formulario
