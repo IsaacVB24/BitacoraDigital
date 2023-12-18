@@ -63,4 +63,5 @@ input[type="checkbox"]:hover{
 }
 td{
     font-size: medium;
+    cursor: pointer;
 }

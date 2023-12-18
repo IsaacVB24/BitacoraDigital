@@ -10,200 +10,159 @@ const durAn_idInput = "durAn";
 const xfti_idInput = "xfti";
 const presCam_idInput = "presCam";
 
+// Cantidad de columnas para cada campo de entrada de la fila 2
+const columnasClaves = 1;
+const columnasDurAn = 3;
+const columnasXFTI = columnasDurAn;
+const columnasPresCam = 3;
+// console.log(columnasClaves, columnasDurAn, columnasXFTI, columnasPresCam);
+
+const claves_placeholder = 'Agregue claves y presione +';
+const tiempo_placeholder = 'HH : MM';
+const presionCamara_placeholder = 'Presión en mbar';
+
+const er_durAr = /^(\d{1,3}):([0-5][0-9])$/;
+const er_xfti = /^(\d{1,4}):([0-5][0-9])$/;
+
 //Tiempo de vida de filamentos de rayos X (XFTI) [horas]:
-const estrucForm = "<div id='fila1' class='filas'><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required maxlength='15'></div><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='100' placeholder='Ingrese nombre de usuario' required></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required maxlength='50'></div></div><div id='fila2' class='filas'><div id='divClavMues'><label for='" + claves_idInput + "'>Claves de muestra:</label><input type='text' name='" + claves_idInput + "' id='" + claves_idInput + "' maxlength='15' placeholder='Agregue claves y presione +' autocomplete='off'><button class='botonMas' id='" + claves_idBotonMas + "' type='button'>+</button><ul id='claveList'></ul></div><div id='divDurAn'><label for='" + durAn_idInput + "'>Duración del análisis [horas]:</label><input type='text' name='" + durAn_idInput + "' id='" + durAn_idInput + "' placeholder='HH : MM' maxlength='6' autocomplete='off'><button class='botonMas' id='" + duracionAnalisis_idBotonMas + "' type='button'>+</button><ul id='duracionList'></ul></div><div id='divXFTI'><label for='" + xfti_idInput + "'>XFTI [horas]:</label><input type='text' name='" + xfti_idInput + "' id='" + xfti_idInput + "' placeholder='HH : MM' maxlength='7' autocomplete='off'><button class='botonMas' id='" + xfti_idBotonMas + "' type='button'>+</button><ul id='xfti_list'></ul></div><div id='divPresCam'><label for='" + presCam_idInput + "'>Presión en cámara de análisis [mbar]:</label><input type='text' name='" + presCam_idInput + "' id='" + presCam_idInput + "' placeholder='Presión en mbar' maxlength='10' autocomplete='off'><button class='botonMas' id='" + presionCamara_idBotonMas + "' type='button'>+</button><ul id='presionCamara_list'></ul></div></div><div id='fila3' class='filas'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.' maxlength='600'></textarea></div><div id='fila4' class='filas'><div><label for='diamHaz'>Diámetro del haz de Rayos X [micras^2]:</label><input type='text' name='diamHaz' id='diamHaz' placeholder='Diámetro en micras^2' required maxlength='10'></div><div><label for='precamara'>Precámara [horas]:</label><input type='text' name='precamara' id='precamara' placeholder='Precámara en horas' required maxlength='7'></div><div><label for='camAnalisis'>Cámara de análisis [horas]:</label><input type='text' name='camAnalisis' id='camAnalisis' placeholder='Cámara de análisis en horas' required maxlength='7'></div></div>";
+const estrucForm = "<div id='fila1' class='filas'><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required maxlength='15' autocomplete='off'></div><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='100' placeholder='Ingrese nombre de usuario' required></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required maxlength='50'></div></div><div id='fila2' class='filas'><div id='divClavMues'><label for='" + claves_idInput + "'>Claves de muestra:</label><input type='text' name='" + claves_idInput + "' id='" + claves_idInput + "' maxlength='15' placeholder='" + claves_placeholder + "' autocomplete='off'><button class='botonMas' id='" + claves_idBotonMas + "' type='button'>+</button><ul id='claveList' style='column-count:" + columnasClaves + "'></ul></div><div id='divDurAn'><label for='" + durAn_idInput + "'>Duración del análisis [horas]:</label><input type='text' name='" + durAn_idInput + "' id='" + durAn_idInput + "' placeholder='" + tiempo_placeholder + "' maxlength='6' autocomplete='off'><button class='botonMas' id='" + duracionAnalisis_idBotonMas + "' type='button'>+</button><ul id='duracionList' style='column-count:" + columnasDurAn + "'></ul></div><div id='divXFTI'><label for='" + xfti_idInput + "'>XFTI [horas]:</label><input type='text' name='" + xfti_idInput + "' id='" + xfti_idInput + "' placeholder='" + tiempo_placeholder + "' maxlength='7' autocomplete='off'><button class='botonMas' id='" + xfti_idBotonMas + "' type='button'>+</button><ul id='xfti_list' style='column-count:" + columnasXFTI + "'></ul></div><div id='divPresCam'><label for='" + presCam_idInput + "'>Presión en cámara de análisis [mbar]:</label><input type='text' name='" + presCam_idInput + "' id='" + presCam_idInput + "' placeholder='" + presionCamara_placeholder + "' maxlength='10' autocomplete='off'><button class='botonMas' id='" + presionCamara_idBotonMas + "' type='button'>+</button><ul id='presionCamara_list' style='column-count:" + columnasPresCam + "'></ul></div></div><div id='fila3' class='filas'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.' maxlength='600'></textarea></div><div id='fila4' class='filas'><div><label for='diamHaz'>Diámetro del haz de Rayos X [micras^2]:</label><input type='text' name='diamHaz' id='diamHaz' placeholder='Diámetro en micras^2' required maxlength='10'></div><div><label for='precamara'>Precámara [horas]:</label><input type='text' name='precamara' id='precamara' placeholder='Precámara en horas' required maxlength='7'></div><div><label for='camAnalisis'>Cámara de análisis [horas]:</label><input type='text' name='camAnalisis' id='camAnalisis' placeholder='Cámara de análisis en horas' required maxlength='7'></div></div>";
 
 const estrucFecha = '<p>Fecha:&nbsp</p><p id="obtenerFecha">';
 
 const clavesMuestra = [];
-const duracionAnalisis = [];
+const duracionAnalisis = ["00:00"];
 const xfti = [];
 const presionCamara = [];
 
 let clavesMuestra_indice = 1;
-let duracionAnalisis_indice = 1;
+let duracionAnalisis_indice = 0;
 let xfti_indice = 1;
 let presionCamara_indice = 1;
 
 const clavesMuestra_maximo = 10;
-const duracionAnalisis_maximo = 20;
-const xfti_maximo = 20;
+const duracionAnalisis_maximo = 30;
+const xfti_maximo = 30;
 const presionCamara_maximo = 30;
 
 // Prototipo de nueva función para botón más:
 // function botonMas(inputObjetivo, arreglo, número máximo de registros)
 
-function botonMas(arreglo, id, numeroIndice, numeroMaximoDeElementos) {
-    // Obtener el div contenedor usando el ID del botón
-    var divContenedor = document.getElementById(id).parentNode;
-
-    // Obtener el input dentro del div contenedor
-    var inputObjetivo = divContenedor.querySelector('input');
-    var contenidoInputObjetivo = inputObjetivo.value;
-
-    // Obtener el ul dentro del div contenedor
-    var ulListaObjetivo = divContenedor.querySelector('ul');
-    var id_inputObjetivo = inputObjetivo.id;
-    var id_ulListaObjetivo = ulListaObjetivo.id;
-    const claveInput = document.getElementById(id_inputObjetivo);
-    const claveList = document.getElementById(id_ulListaObjetivo);
-    const placeholder = claveInput.placeholder;
-
-    // Obtiene el valor del campo de entrada de la clave
-    const claveValue = claveInput.value;
-    claveInput.value = '';
-
-    // Verifica si se ha ingresado algo en el campo
-    if (claveValue) {
-        inputObjetivo.required = false;
-        const ingresarAlArreglo = claveValue;
-        arreglo.push(ingresarAlArreglo);
-        //const indiceClave = arreglo.indexOf(ingresarAlArreglo);
-        claveList.style.display = "block";
-        
-        // Crea un nuevo elemento de lista
-        const listItem = document.createElement('li');
-
-        // Inserta el número de índice al elemento
-        const spanList = document.createElement('span');
-        spanList.textContent = numeroIndice + ')';
-
-        // Crea un párrafo que contendrá la información del elemento
-        const parrafoList = document.createElement('p');
-        parrafoList.style.width = "15ch";
-        parrafoList.textContent = ingresarAlArreglo;
-
-        // Crea un botón de modificación de elemento en lista
-        const modificarList = document.createElement('button');
-
-        // Crea un botón de eliminación
-        const deleteButton = document.createElement('button');
-
-        if(inputObjetivo.id == claves_idInput){
-            modificarList.textContent = 'Modificar';
-            deleteButton.textContent = 'Eliminar';
-        } else{
-            modificarList.textContent = 'M';
-            deleteButton.textContent = 'E';
-        }
-
-        let contenidoElemento = ingresarAlArreglo;
-        
-        // Agrega un controlador de eventos al botón de modificación
-        modificarList.addEventListener('click', function () {
-            // Crea un input para editar el texto
-            const editInput = document.createElement('input');
-            editInput.maxLength = 15;
-
-            editInput.value = arreglo[arreglo.indexOf(contenidoElemento)];
-
-            // Crea un botón de "Guardar" para confirmar la edición
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Guardar';
-
-            // Función para mostrar los botones de "Modificar" y "Eliminar"
-            function mostrarBotones() {
-                // Muestra los botones "Modificar" y "Eliminar"
-                listItem.appendChild(modificarList);
-                listItem.appendChild(deleteButton);
-                // Elimina el input y el botón "Guardar"
-                /*
-                listItem.removeChild(editInput);
-                listItem.removeChild(saveButton);
-                */
-            }
-
-            // Agrega un controlador de eventos al botón "Guardar"
-            saveButton.addEventListener('click', function () {
-                // Actualiza el texto del elemento de la lista con el valor del input editado
-                listItem.textContent = editInput.value;
-                mostrarBotones();
-                arreglo[arreglo.indexOf(contenidoElemento)] = listItem.textContent;
-                // Llama a la función para mostrar los botones
-            });
-
-            // Limpia el campo li a tratar y agrega el botón "Guardar"
-            listItem.textContent = '';
-            listItem.appendChild(editInput);
-            listItem.appendChild(saveButton);
-
-            // Oculta los botones "Modificar" y "Eliminar"
-            /*
-            console.log("listItem.firstChild: " + listItem.children);
-            console.log("listItem.firstElementChild: " + listItem.firstElementChild.value);
-            listItem.removeChild(modificarList);
-            listItem.removeChild(deleteButton);
-            */
-        });
-        numeroIndice = arreglo.length;
-        
-        // Agrega un controlador de eventos al botón de eliminación
-        deleteButton.addEventListener('click', function () {
-            const indicePorEliminar = arreglo.indexOf(contenidoElemento);
-            if(indicePorEliminar !== -1){
-                arreglo.splice(indicePorEliminar, 1);
-                claveList.removeChild(listItem);
-            } 
-            if(arreglo.length < numeroMaximoDeElementos){
-                claveInput.readOnly = false;
-                claveInput.placeholder = placeholder;
-                claveInput.style.cursor = "text";
-            }
-            arreglo.length > 0 ? inputObjetivo.required = false : inputObjetivo = true;
-            if(arreglo.length === 0){
-                inputObjetivo.required = true;
-            }
-                console.log(arreglo);
-            // Actualiza los índices de los elementos restantes
-            for (numeroIndice = 0; numeroIndice < arreglo.length; numeroIndice++) {
-                console.log("tamaño arreglo: "+ arreglo.length);
-                let elemento = claveList.children[numeroIndice].querySelector('span');
-                let contenidoIndice = elemento.textContent;
-                contenidoIndice = contenidoIndice.replace(/\d+\)/, numeroIndice+1 + ')');
-                // Asigna el nuevo contenido al elemento
-                elemento.textContent = contenidoIndice;
-            }
-            //arreglo.length === 0 ? document.getElementById("claveList").style.display = "none" : null;
-        });
-
-        // Agrega el número de índice al elemento de la lista
-        listItem.append(spanList);
-        
-        // Agrega el párrafo al elemento de la lista
-        listItem.appendChild(parrafoList);
-
-        // Agrega el botón de modificación al elemento de lista
-        listItem.appendChild(modificarList);
-
-        // Agrega el botón de eliminación al elemento de lista
-        listItem.appendChild(deleteButton);
-
-        // Configura la posición de los elementos como "block" para visualizarlos
-        listItem.style.position = 'block';
-
-        // Añade el elemento de lista a la lista de claves
-        claveList.appendChild(listItem);
-
-        // Ajusta la posición vertical de los elementos nuevos
-        const newElementPosition = claveList.childElementCount * 20 + 'px';
-        listItem.style.top = newElementPosition;
-
-        // Borra el campo de entrada de la clave
-        claveInput.value = '';
-
-        // Asegura que la lista tenga una altura máxima de 50px y habilite el scroll si es necesario
-        claveList.style.maxHeight = '100%';
-        // claveList.style.overflowY = 'auto';
-        
-        // Vuelve a enfocar el campo de entrada clavMues
-        claveInput.focus();
-        //clavesPierdeFocus();
+function botonMas(arreglo, id, numeroIndice, numeroMaximoDeElementos, numeroColumnas) {
+    const divPadre = document.getElementById(id).parentNode;
+    const input = divPadre.querySelector("input");
+    let valorInput = input.value.trim();
+    if(valorInput){
+        input.required = false;
+        arreglo.push(valorInput);
+        input.value = '';
+        const lista = divPadre.querySelector("ul");
+        mostrarLista(arreglo, lista, numeroColumnas);
         if(arreglo.length >= numeroMaximoDeElementos){
-            claveInput.readOnly = true;
-            claveInput.placeholder = "Superó el límite: " + numeroMaximoDeElementos;
-            claveInput.style.cursor = "default";
+            input.readOnly = true;
+            input.placeholder = 'Superó el límite: ' + (arreglo === duracionAnalisis ? numeroMaximoDeElementos-1 : numeroMaximoDeElementos);
+            input.style.cursor = 'default';
         }
     }
+    input.focus();
+}
+
+function mostrarLista(arreglo, listaUl, numeroColumnas){
+    listaUl.innerHTML = '';
+    const arregloCero = arreglo[0] === '00:00' ? true : false;
+    listaUl.style.columnCount = numeroColumnas;
+    listaUl.style.display = 'block';
+    listaUl.style.flexWrap = 'wrap';
+    for(let i=0; i<arreglo.length; i++){
+        const elementoLi = document.createElement("li");
+        const span = document.createElement("span");
+        const parrafo = document.createElement("p");
+        parrafo.style.width = '15ch';
+        parrafo.textContent = arreglo[i];
+        if(arreglo !== duracionAnalisis){
+            span.innerHTML = (i+1)+') ';
+        } else{
+            if(!(arreglo[i] === '00:00')){
+                span.innerHTML = i + ') ';
+            }
+        }
+        elementoLi.appendChild(span);
+        elementoLi.appendChild(parrafo);
+        listaUl.style.position = "block";
+        elementoLi.style.position = "block";
+
+        const botonModificar = document.createElement('button');
+        botonModificar.textContent = "M";
+        botonModificar.addEventListener('click', function (event){
+            modificarElemento(arreglo, i, parrafo, event);
+        });
+
+        const botonEliminar = document.createElement('button');
+        botonEliminar.textContent = "E";
+        botonEliminar.addEventListener('click', function () {
+            eliminarElemento(arreglo, i, elementoLi, listaUl, numeroColumnas);
+        });
+
+        if(!(arreglo[i] === '00:00')){
+            elementoLi.appendChild(botonModificar);
+            elementoLi.appendChild(botonEliminar);
+        }
+        listaUl.appendChild(elementoLi);
+        // Ajusta la posición vertical de los elementos nuevos
+        const newElementPosition = listaUl.childElementCount * 20 + 'px';
+        elementoLi.style.top = newElementPosition;
+    }
+}
+
+function modificarElemento(arreglo, indice, parrafo, event){
+    const nuevoContenido = prompt('Ingrese el nuevo contenido:');
+    const input = parrafo.parentNode.parentNode.previousElementSibling.previousElementSibling;
+    if(nuevoContenido !== null){
+        if(arreglo === duracionAnalisis || arreglo === xfti){
+            if(validarTiempoModificado(nuevoContenido, arreglo)){
+                arreglo[indice] = nuevoContenido;
+                parrafo.textContent = nuevoContenido;
+                event.preventDefault();
+                input.focus();
+            } else{
+                modificarElemento(arreglo, indice, parrafo);
+            }
+        }
+    }
+}
+
+function validarTiempoModificado(contenido, arreglo){
+    if(arreglo = duracionAnalisis){
+        if(!er_durAr.test(contenido) && contenido !== ''){
+            alert("Formato no válido. Ingrese un tiempo de forma correcta.");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function eliminarElemento(arreglo, indice, elementoLi, listaUl, numeroColumnas){
+    arreglo.splice(indice, 1);
+    elementoLi.remove();
+    const input = listaUl.previousElementSibling.previousElementSibling;
+    if(arreglo === clavesMuestra){
+        input.placeholder = claves_placeholder;
+    }
+    if(arreglo === duracionAnalisis){
+        input.placeholder = tiempo_placeholder;
+        if(arreglo.length === 1){
+            input.required = true;
+        }
+    }
+    if(arreglo === xfti){
+        input.placeholder = tiempo_placeholder;
+    }
+    if(arreglo === presionCamara){
+        input.placeholder = presionCamara_placeholder;
+    }
+    input.readOnly = false;
+    input.style.cursor = 'text';
+    mostrarLista(arreglo, listaUl, numeroColumnas);
 }
 
 function agregarFecha(){
@@ -299,11 +258,11 @@ function clavesPierdeFocus() {
  */
 
 function crearFormulario() {
-    document.getElementById('formulario').innerHTML = '<form action="/crearRegistro" method="POST" onsubmit="return validarClaves()">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit" onclick="botonSubmit()">Crear nuevo registro</button></form>';
-    asignarFuncion_botonMas(claves_idBotonMas, clavesMuestra, clavesMuestra_indice, clavesMuestra_maximo);
-    asignarFuncion_botonMas(duracionAnalisis_idBotonMas, duracionAnalisis, duracionAnalisis_indice, duracionAnalisis_maximo);
-    asignarFuncion_botonMas(xfti_idBotonMas, xfti, xfti_indice, xfti_maximo);
-    asignarFuncion_botonMas(presionCamara_idBotonMas, presionCamara, presionCamara_indice, presionCamara_maximo);
+    document.getElementById('formulario').innerHTML = '<form action="/crearRegistro" method="POST" onsubmit="return validarClaves()">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Crear nuevo registro</button></form>';
+    asignarFuncion_botonMas(claves_idBotonMas, clavesMuestra, clavesMuestra_indice, clavesMuestra_maximo, columnasClaves);
+    asignarFuncion_botonMas(duracionAnalisis_idBotonMas, duracionAnalisis, duracionAnalisis_indice, duracionAnalisis_maximo+1, columnasDurAn);
+    asignarFuncion_botonMas(xfti_idBotonMas, xfti, xfti_indice, xfti_maximo, columnasXFTI);
+    asignarFuncion_botonMas(presionCamara_idBotonMas, presionCamara, presionCamara_indice, presionCamara_maximo, columnasPresCam);
     //document.getElementById("claveList").style.display = "none";
     //clavesPierdeFocus();
     validarFormatoTiempo();
@@ -414,7 +373,7 @@ function crearLista(listaEnComas, inputID){
 function validarFormatoTiempo() {
     // Validación para duración del análisis
     // Expresión regular para validar el formato HH:MM y permitir solo números y ':'
-    const formatoDurAn = /^(\d{1,3}):([0-5][0-9])$/;
+    const formatoDurAn = er_durAr;
     const duracionAnalisis = document.getElementById(durAn_idInput);
     duracionAnalisis.addEventListener('blur', function () {
         const valor = duracionAnalisis.value.trim();
@@ -428,7 +387,7 @@ function validarFormatoTiempo() {
 
     // Validación para XFTI
     // Expresión regular para validar el formato HH:MM y permitir solo números y ':'
-    const formatoValido = /^(\d{1,4}):([0-5][0-9])$/;
+    const formatoValido = er_xfti;
     const xfti = document.getElementById(xfti_idInput);
     xfti.addEventListener('blur', function () {
         const valor = xfti.value.trim();
