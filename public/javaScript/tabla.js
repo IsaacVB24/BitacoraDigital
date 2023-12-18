@@ -167,6 +167,45 @@ function handleCheckboxChange(event) {
     }
 }
 
+// Función para realizar la búsqueda y mostrar los resultados en la tabla
+function realizarBusqueda() {
+    const campoBusqueda = document.getElementById('ingresarTexto');
+    const terminoBusqueda = campoBusqueda.value.trim().toLowerCase();
+
+    // Realiza una solicitud al servidor para obtener los registros filtrados
+    fetch(`/buscarRegistros?termino=${terminoBusqueda}`)
+        .then(response => response.json())
+        .then(data => {
+            const tablaRegistros = document.getElementById('tablaRegistros');
+            // Limpia cualquier contenido previo en la tabla
+            tablaRegistros.innerHTML = '';
+
+            // Itera sobre los datos y agrega las filas a la tabla
+            data.forEach(registro => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td id='encSeleccionar'><input type="checkbox" data-registro-id="${registro.id}" onchange="handleCheckboxChange(event)"></td>
+                    <td id='solicitud'>${registro.num_solicitud}</td>
+                    <td id='usuario'>${registro.nombre_usuario}</td>
+                    <td id='fecha'>${registro.fecha}</td>
+                    <td class='truncate' id='clave'>${registro.clave_muestra}</td>
+                    <td class='truncate' id='fuentes'>${registro.fuentes_empleadas}</td>
+                    <td class='truncate' id="duracionAnalisis">${registro.duracion_analisis}</td>
+                `;
+                tablaRegistros.appendChild(fila);
+            });
+
+            // Si no hay registros coincidentes, muestra un mensaje
+            if (data.length === 0) {
+                const sinCoincidencias = document.createElement('tr');
+                sinCoincidencias.innerHTML = `
+                    <td colspan="7"><center id="sinCoincidencias">No hay coincidencias para el término de búsqueda.</center></th>`;
+                tablaRegistros.appendChild(sinCoincidencias);
+            }
+        })
+        .catch(error => console.error('Error al realizar búsqueda:', error));
+}
+
 // Función para obtener los registros de la base de datos y mostrarlos en la tabla
 function mostrarRegistros() {
     // Realiza una solicitud al servidor para obtener los registros

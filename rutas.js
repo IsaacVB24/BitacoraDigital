@@ -154,4 +154,37 @@ router.get('/obtenerRegistro/:id', (req, res) => {
     });
 });
 
+// Ruta para manejar búsquedas
+router.get('/buscarRegistros', (req, res) => {
+    const terminoBusqueda = req.query.termino;
+
+    // Lógica para buscar en la base de datos según el término de búsqueda
+    const sql = `
+        SELECT * FROM registros
+        WHERE nombre_usuario LIKE ? OR
+              num_solicitud LIKE ? OR
+              clave_muestra LIKE ? OR
+              fuentes_empleadas LIKE ? OR
+              duracion_analisis LIKE ? OR
+              tiempo_vida_filamentos LIKE ? OR
+              presion_camara_analisis LIKE ? OR
+              observaciones LIKE ? OR
+              fecha LIKE ? OR
+              diametro_haz LIKE ? OR
+              precamara LIKE ? OR
+              camara LIKE ?
+    `;
+
+    const params = Array.from({ length: 12 }, () => `%${terminoBusqueda}%`);
+
+    baseDeDatos.db.all(sql, params, (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Error al realizar la búsqueda' });
+        } else {
+            res.json(rows); // Devuelve los resultados de la búsqueda en formato JSON
+        }
+    });
+});
+
 module.exports = router;
