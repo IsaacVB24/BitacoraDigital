@@ -47,7 +47,7 @@ const presionCamara_maximo = 30;
 // Prototipo de nueva función para botón más:
 // function botonMas(inputObjetivo, arreglo, número máximo de registros)
 
-function botonMas(arreglo, id, numeroIndice, numeroMaximoDeElementos, numeroColumnas) {
+function botonMas(arreglo, id, numeroMaximoDeElementos, numeroColumnas) {
     const divPadre = document.getElementById(id).parentNode;
     const input = divPadre.querySelector("input");
     let valorInput = input.value.trim();
@@ -259,25 +259,21 @@ function clavesPierdeFocus() {
 
 function crearFormulario() {
     document.getElementById('formulario').innerHTML = '<form action="/crearRegistro" method="POST" onsubmit="return validarClaves()">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Crear nuevo registro</button></form>';
-    asignarFuncion_botonMas(claves_idBotonMas, clavesMuestra, clavesMuestra_indice, clavesMuestra_maximo, columnasClaves);
-    asignarFuncion_botonMas(duracionAnalisis_idBotonMas, duracionAnalisis, duracionAnalisis_indice, duracionAnalisis_maximo+1, columnasDurAn);
-    asignarFuncion_botonMas(xfti_idBotonMas, xfti, xfti_indice, xfti_maximo, columnasXFTI);
-    asignarFuncion_botonMas(presionCamara_idBotonMas, presionCamara, presionCamara_indice, presionCamara_maximo, columnasPresCam);
+    asignarFuncion_botonMas(claves_idBotonMas, clavesMuestra, clavesMuestra_maximo, columnasClaves);
+    asignarFuncion_botonMas(duracionAnalisis_idBotonMas, duracionAnalisis, duracionAnalisis_maximo+1, columnasDurAn);
+    asignarFuncion_botonMas(xfti_idBotonMas, xfti, xfti_maximo, columnasXFTI);
+    asignarFuncion_botonMas(presionCamara_idBotonMas, presionCamara, presionCamara_maximo, columnasPresCam);
     //document.getElementById("claveList").style.display = "none";
     //clavesPierdeFocus();
     validarFormatoTiempo();
 }
 
-function asignarFuncion_botonMas(id, arreglo, numeroDeIndice, numeroMaximoDeElementos){
+function asignarFuncion_botonMas(id, arreglo, numeroMaximoDeElementos, numeroCols){
     var divContenedor = document.getElementById(id).parentNode;
     // Obtener el input dentro del div contenedor
     var inputObjetivo = divContenedor.querySelector('input');
     document.getElementById(id).onclick = function() {
-        var valorInput = inputObjetivo.value;
-        botonMas(arreglo, id, numeroDeIndice, numeroMaximoDeElementos);
-        if(valorInput != ''){
-            numeroDeIndice++;
-        }
+        botonMas(arreglo, id, numeroMaximoDeElementos, numeroCols);
     };
     inputObjetivo.required = true;
 }
