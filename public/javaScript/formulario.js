@@ -68,7 +68,6 @@ function botonMas(arreglo, id, numeroMaximoDeElementos, numeroColumnas) {
 
 function mostrarLista(arreglo, listaUl, numeroColumnas){
     listaUl.innerHTML = '';
-    const arregloCero = arreglo[0] === '00:00' ? true : false;
     listaUl.style.columnCount = numeroColumnas;
     listaUl.style.display = 'block';
     listaUl.style.flexWrap = 'wrap';
@@ -132,7 +131,7 @@ function modificarElemento(arreglo, indice, parrafo, event){
 }
 
 function validarTiempoModificado(contenido, arreglo){
-    if(arreglo = duracionAnalisis){
+    if(arreglo === duracionAnalisis){
         if(!er_durAr.test(contenido) && contenido !== ''){
             alert("Formato no válido. Ingrese un tiempo de forma correcta.");
             return false;

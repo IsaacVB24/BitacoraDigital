@@ -144,10 +144,6 @@ function handleCheckboxChange(event) {
     }
 
     // Habilitar o deshabilitar el botón de eliminar según si hay registros seleccionados
-    const botonEliminar = 'eliminarR';
-    const botonModificar = 'modificarR';
-    const botonVisualizar = 'visualizarR';
-    const botonCrear = "crearR";
     
     if(registrosSeleccionados.size === 0){
         console.clear();
@@ -165,6 +161,29 @@ function handleCheckboxChange(event) {
         deshabilitarBotonPrincipal(botonModificar);
         deshabilitarBotonPrincipal(botonVisualizar);
     }
+}
+
+const botonModificar = 'modificarR';
+const botonVisualizar = 'visualizarR';
+const botonCrear = "crearR";
+
+document.addEventListener('DOMContentLoaded', function () {
+    if(rutaActual === '/') document.getElementById('ingresarTexto').addEventListener('input', function (event) {
+        realizarBusqueda();
+        const seleccionarTodo = document.getElementById("seleccionarTodo");
+        seleccionarTodo.style.backgroundColor = "#f2f2f2";
+    });
+});
+
+function deseleccionarCheckboxes(){
+    const checkboxes = document.querySelectorAll('#tablaMain input[type="checkbox"]');
+    
+    checkboxes.forEach(caja => {
+        caja.checked = false;
+    });
+    // Simular clic doble en el botón de seleccionar todos los registros, para que se limpie la interacción con los botones y se reestablezca como en el inicio
+    document.getElementById("seleccionarTodo").click();
+    document.getElementById("seleccionarTodo").click();
 }
 
 // Función para realizar la búsqueda y mostrar los resultados en la tabla
@@ -201,7 +220,13 @@ function realizarBusqueda() {
                 sinCoincidencias.innerHTML = `
                     <td colspan="7"><center id="sinCoincidencias">No hay coincidencias para el término de búsqueda.</center></th>`;
                 tablaRegistros.appendChild(sinCoincidencias);
+                // Deshabilitar o habilitar botones de interacción con los registros para que vuelvan a su estado original
+                habilitarBotonPrincipal(botonCrear);
+                deshabilitarBotonEliminarR(botonModificar);
+                deshabilitarBotonPrincipal(botonVisualizar);
+                deshabilitarBotonEliminarR();
             }
+            deseleccionarCheckboxes();
         })
         .catch(error => console.error('Error al realizar búsqueda:', error));
 }

@@ -163,19 +163,10 @@ router.get('/buscarRegistros', (req, res) => {
         SELECT * FROM registros
         WHERE nombre_usuario LIKE ? OR
               num_solicitud LIKE ? OR
-              clave_muestra LIKE ? OR
-              fuentes_empleadas LIKE ? OR
-              duracion_analisis LIKE ? OR
-              tiempo_vida_filamentos LIKE ? OR
-              presion_camara_analisis LIKE ? OR
-              observaciones LIKE ? OR
-              fecha LIKE ? OR
-              diametro_haz LIKE ? OR
-              precamara LIKE ? OR
-              camara LIKE ?
+              fecha LIKE ?
     `;
 
-    const params = Array.from({ length: 12 }, () => `%${terminoBusqueda}%`);
+    const params = Array.from({ length: 3 }, () => `%${terminoBusqueda}%`);
 
     baseDeDatos.db.all(sql, params, (err, rows) => {
         if (err) {
