@@ -8,6 +8,7 @@
         <script type="text/javascript" src="/javaScript/eliminarRegistro.js"></script>
         <script type="text/javascript" src="/javaScript/tabla.js"></script>
         <script type="text/javascript" src="/javaScript/formulario.js"></script>
+        <script type="text/javascript" src="/javaScript/filtrado.js"></script>
     </head>
 
     <body onload="version(), mostrarRegistros()">
@@ -36,7 +37,7 @@
                         <img id="lupa" src="/imagenes/png-transparent-magnifying-glass-magnification-magnifying-glass-glass-logo-light.png" onclick="realizarBusqueda()">
                     </div>
                     <!-- Filtrar por: -->
-                    <div class="filtrar">
+                    <div class="filtrar" onclick="activarVentanaFiltrado()">
                         <img id="filtro" src="/imagenes/fitro.png">
                         <button id="filtrarPor">Filtrar por:</button>
                     </div>
@@ -76,6 +77,7 @@
                 </div>
                 
                 <div id="emergente-eliminarR"></div>
+                <div id="emergente-filtros"></div>
             </div>
             <footer class="piePagina">
                 <div id="contPie">

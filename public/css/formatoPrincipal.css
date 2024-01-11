@@ -139,9 +139,6 @@ a:hover{
     height: 25px;
     border-radius: 20px;
 }
-#lupa:hover{
-    cursor: pointer;
-}
 #filtro{
     height: 20px;
     padding: 10;
@@ -237,4 +234,71 @@ button.fin{
     margin-right: 40px;
     padding-right: 10px;
     align-items: center;
+}
+#emergente-filtros {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: auto;
+    background-color: rgba(51, 51, 51, 0.35);
+}
+/*Listo 2.0*/
+#filtros_year_month {
+    display: flex;
+    background-color: #4a4747;
+    margin: 1% auto;
+    padding: 20px;
+    border: 5px solid black;
+    width: 35%;
+    position: relative;
+    color: white;
+}
+#months, #years {
+    flex: 1; /* Distribuye el espacio de manera igual entre meses y años */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* Espacio entre meses y años */
+}
+#years {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+#botonesFiltros {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos a los extremos */
+    align-self: flex-end;
+    width: 100%;
+    position: absolute;
+    margin-top: 20%;
+}
+#aplicarFiltros {
+    background-color: rgb(100, 199, 160);
+}
+.filtro-group {
+    flex: 1; /* Distribuye el espacio de manera igual entre meses y años */
+    display: flex;
+    flex-direction: row; /* Alinea los elementos en una fila */
+    align-items: center; /* Centra verticalmente */
+}
+#months{
+    align-items: center;
+}
+#months input{
+    order: 1;
+}
+#months label{
+    order: 2;
+    margin-left: 8px;
+}
+.contenedorOpcion {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15%;
 }
