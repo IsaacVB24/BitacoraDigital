@@ -302,3 +302,6 @@ button.fin{
     align-items: center;
     margin-bottom: 15%;
 }
+.contenedorOpcion label:hover{
+    cursor: pointer;
+}

@@ -178,4 +178,27 @@ router.get('/buscarRegistros', (req, res) => {
     });
 });
 
+// Ruta para obtener fechas completas desde la base de datos
+router.get('/obtenerAnios', (req, res) => {
+    baseDeDatos.db.all('SELECT fecha FROM registros', (err, rows) => {
+        if (err) {
+            console.log("algo");
+            console.error(err.message);
+            res.status(500).json({ error: 'Error al obtener fechas' });
+        } else {
+            const fechas = rows.map(row => row.fecha);
+            console.log(fechas);
+            const aniosUnicos = obtenerAniosUnicos(fechas);
+            console.log(aniosUnicos);
+            res.json(aniosUnicos); // Devuelve los años únicos en formato JSON
+        }
+    });
+});
+
+// Función para obtener años únicos desde fechas completas en JavaScript
+function obtenerAniosUnicos(fechas) {
+    const aniosUnicos = [...new Set(fechas.map(fecha => new Date(fecha).getFullYear()))];
+    return aniosUnicos;
+}
+
 module.exports = router;
