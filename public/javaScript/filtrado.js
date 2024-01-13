@@ -1,5 +1,7 @@
 const estrVentFiltrado = '<div id="filtros_year_month"><div id="months" class="filtro-group"><p>Mes:</p><br></div><div id="years" class="filtro-group"><p>Año:</p></div><div id="botonesFiltros"><button class="btn-registros" id="cancelar" onclick="cancelarFiltros()">Cancelar</button><button class="btn-registros" id="aplicarFiltros" onclick="filtrado()">Aplicar filtros</button></div></div>';
 
+var filtroActivo = false;
+
 function activarVentanaFiltrado(){
     const divVentanaFiltros = document.getElementById('emergente-filtros');
     divVentanaFiltros.innerHTML = estrVentFiltrado;
@@ -95,6 +97,67 @@ function actualizarBotonFiltros() {
     });
 }
 
-function filtrado(){
-    //COMPLETAR
+function filtrado() {
+    activarBotonEliminarFiltros();
+    const divVentanaFiltros = document.getElementById('emergente-filtros');
+    divVentanaFiltros.style.display = 'none';
+
+    const checkboxesMeses = document.querySelectorAll('#months input[type="checkbox"]:checked');
+    const checkboxesAnios = document.querySelectorAll('#years input[type="checkbox"]:checked');
+
+    const mesesSeleccionados = Array.from(checkboxesMeses).map(checkbox => parseInt(checkbox.value));
+    const aniosSeleccionados = Array.from(checkboxesAnios).map(checkbox => parseInt(checkbox.value));
+    
+    // Realiza una solicitud al servidor para obtener los registros filtrados
+    fetch(`/filtrarRegistros?meses=${JSON.stringify(mesesSeleccionados)}&anios=${JSON.stringify(aniosSeleccionados)}`)
+        .then(response => response.json())
+        .then(data => {
+            const tablaRegistros = document.getElementById('tablaRegistros');
+            // Limpia cualquier contenido previo en la tabla
+            tablaRegistros.innerHTML = '';
+
+            // Itera sobre los datos y agrega las filas a la tabla
+            data.forEach(registro => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td id='encSeleccionar'><input type="checkbox" data-registro-id="${registro.id}" onchange="handleCheckboxChange(event)"></td>
+                    <td id='solicitud'>${registro.num_solicitud}</td>
+                    <td id='usuario'>${registro.nombre_usuario}</td>
+                    <td id='fecha'>${registro.fecha}</td>
+                    <td class='truncate' id='clave'>${registro.clave_muestra}</td>
+                    <td class='truncate' id='fuentes'>${registro.fuentes_empleadas}</td>
+                    <td class='truncate' id="duracionAnalisis">${registro.duracion_analisis}</td>
+                `;
+                tablaRegistros.appendChild(fila);
+            });
+
+            // Si no hay registros coincidentes, muestra un mensaje
+            if (data.length === 0) {
+                const sinCoincidencias = document.createElement('tr');
+                sinCoincidencias.innerHTML = `
+                    <td colspan="7"><center id="sinCoincidencias">No hay coincidencias para los filtros seleccionados.</center></th>`;
+                tablaRegistros.appendChild(sinCoincidencias);
+            }
+        })
+        .catch(error => console.error('Error al realizar filtrado:', error));
+}
+
+function activarBotonEliminarFiltros(){
+    const enlaceEliminarFiltros = document.getElementById('btnEliminarFiltro');
+
+    enlaceEliminarFiltros.style.cursor = 'pointer';
+    enlaceEliminarFiltros.style.color = '#8d2626';
+    enlaceEliminarFiltros.onclick = eliminarFiltros;
+}
+function desactivarBotonEliminarFiltros(){
+    const enlaceEliminarFiltros = document.getElementById('btnEliminarFiltro');
+
+    enlaceEliminarFiltros.style.cursor = 'default';
+    enlaceEliminarFiltros.style.color = '#00000073';
+    enlaceEliminarFiltros.onclick = '';
+}
+
+function eliminarFiltros(){
+    desactivarBotonEliminarFiltros();
+    mostrarRegistros();
 }

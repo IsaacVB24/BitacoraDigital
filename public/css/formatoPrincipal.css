@@ -112,7 +112,7 @@ a:hover{
     display: flex;
     justify-content: center;
 }
-#eliminarFiltro{
+#btnEliminarFiltro{
     margin: auto;
     text-decoration: underline;
     color: rgba(0, 0, 0, 0.450);

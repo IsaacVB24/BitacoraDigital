@@ -182,14 +182,11 @@ router.get('/buscarRegistros', (req, res) => {
 router.get('/obtenerAnios', (req, res) => {
     baseDeDatos.db.all('SELECT fecha FROM registros', (err, rows) => {
         if (err) {
-            console.log("algo");
             console.error(err.message);
             res.status(500).json({ error: 'Error al obtener fechas' });
         } else {
             const fechas = rows.map(row => row.fecha);
-            console.log(fechas);
             const aniosUnicos = obtenerAniosUnicos(fechas);
-            console.log(aniosUnicos);
             res.json(aniosUnicos); // Devuelve los años únicos en formato JSON
         }
     });
@@ -200,5 +197,47 @@ function obtenerAniosUnicos(fechas) {
     const aniosUnicos = [...new Set(fechas.map(fecha => new Date(fecha).getFullYear()))];
     return aniosUnicos;
 }
+
+// Ruta para filtrar registros según meses y años seleccionados
+router.get('/filtrarRegistros', (req, res) => {
+    const { meses, anios } = req.query;
+
+    // Parsea los valores de meses y años desde JSON
+    const mesesSeleccionados = JSON.parse(meses);
+    const aniosSeleccionados = JSON.parse(anios);
+
+    const sql_soloAnios = `
+        SELECT *
+        FROM registros
+        WHERE fecha IS NOT NULL
+            AND CAST(substr(fecha, -4) AS INTEGER) IN (${aniosSeleccionados})
+    `;
+    const sql_soloMeses = `
+        SELECT *
+        FROM registros
+        WHERE fecha IS NOT NULL
+            AND CAST(substr(fecha, 1, 2) AS INTEGER) IN (${mesesSeleccionados})
+    `;
+    const sql_completo = `
+        SELECT *
+        FROM registros
+        WHERE fecha IS NOT NULL
+            AND CAST(substr(fecha, -4) AS INTEGER) IN (${aniosSeleccionados})
+            AND CAST(substr(fecha, 1, 2) AS INTEGER) IN (${mesesSeleccionados})
+    `;
+
+    var sql = sql_completo;
+    // Lógica para filtrar registros en la base de datos según los meses y años seleccionados
+    mesesSeleccionados.length === 0 ? sql = sql_soloAnios : (aniosSeleccionados.length === 0 ? sql = sql_soloMeses : sql = sql);
+
+    baseDeDatos.db.all(sql, (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Error al realizar el filtrado' });
+        } else {
+            res.json(rows); // Devuelve los resultados del filtrado en formato JSON
+        }
+    });
+});
 
 module.exports = router;
