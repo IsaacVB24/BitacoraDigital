@@ -147,7 +147,9 @@ function activarBotonEliminarFiltros(){
 
     enlaceEliminarFiltros.style.cursor = 'pointer';
     enlaceEliminarFiltros.style.color = '#8d2626';
-    enlaceEliminarFiltros.onclick = eliminarFiltros;
+    enlaceEliminarFiltros.onclick = function() {
+        window.location.reload();
+    };    
 }
 function desactivarBotonEliminarFiltros(){
     const enlaceEliminarFiltros = document.getElementById('btnEliminarFiltro');

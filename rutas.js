@@ -24,6 +24,9 @@ router.get('/visualizarRegistro', (req, res) => {
 
 // Ruta para manejar la creación de registros
 router.post('/crearRegistro', (req, res) => {
+    const obtenerDigitoDos = (digito) => (digito < 10 ? '0' : '') + digito;
+
+    const fechaActual = new Date();
     const nuevoRegistro = {
         nombre_usuario: req.body.nomUs,
         num_solicitud: req.body.numSol,
@@ -33,11 +36,13 @@ router.post('/crearRegistro', (req, res) => {
         tiempo_vida_filamentos: `${req.body.xfti}`,
         presion_camara_analisis: req.body.presCam,
         observaciones: req.body.observaciones,
-        fecha: new Date().toLocaleDateString(),     // Obtener la fecha del sistema
+        fecha: obtenerDigitoDos(fechaActual.getDate()) + '/' +
+               obtenerDigitoDos(fechaActual.getMonth() + 1) + '/' +
+               fechaActual.getFullYear(),
         diametro_haz: req.body.diamHaz,
         precamara: req.body.precamara,
         camara: req.body.camAnalisis,
-      };
+    };
 
     baseDeDatos.guardarRegistro(nuevoRegistro); // Llama a la función para guardar el registro
     res.redirect('/'); // Redirige de vuelta a la página principal
@@ -186,16 +191,23 @@ router.get('/obtenerAnios', (req, res) => {
             res.status(500).json({ error: 'Error al obtener fechas' });
         } else {
             const fechas = rows.map(row => row.fecha);
-            const aniosUnicos = obtenerAniosUnicos(fechas);
+            const aniosUnicos = obtenerAniosUnicosNuevoFormato(fechas);
             res.json(aniosUnicos); // Devuelve los años únicos en formato JSON
         }
     });
 });
 
-// Función para obtener años únicos desde fechas completas en JavaScript
-function obtenerAniosUnicos(fechas) {
-    const aniosUnicos = [...new Set(fechas.map(fecha => new Date(fecha).getFullYear()))];
+// Función para obtener años únicos desde fechas completas en JavaScript con nuevo formato
+function obtenerAniosUnicosNuevoFormato(fechas) {
+    const aniosUnicos = [...new Set(fechas.map(fecha => obtenerAnioNuevoFormato(fecha)))];
     return aniosUnicos;
+}
+
+// Función para obtener el año desde una fecha en formato nuevo (dd/mm/aaaa)
+function obtenerAnioNuevoFormato(fecha) {
+    const partesFecha = fecha.split('/');
+    const anio = partesFecha[2];
+    return parseInt(anio, 10); // Convierte el año a entero
 }
 
 // Ruta para filtrar registros según meses y años seleccionados
@@ -216,14 +228,14 @@ router.get('/filtrarRegistros', (req, res) => {
         SELECT *
         FROM registros
         WHERE fecha IS NOT NULL
-            AND CAST(substr(fecha, 1, 2) AS INTEGER) IN (${mesesSeleccionados})
+            AND CAST(substr(fecha, 4, 2) AS INTEGER) IN (${mesesSeleccionados})
     `;
     const sql_completo = `
         SELECT *
         FROM registros
         WHERE fecha IS NOT NULL
             AND CAST(substr(fecha, -4) AS INTEGER) IN (${aniosSeleccionados})
-            AND CAST(substr(fecha, 1, 2) AS INTEGER) IN (${mesesSeleccionados})
+            AND CAST(substr(fecha, 4, 2) AS INTEGER) IN (${mesesSeleccionados})
     `;
 
     var sql = sql_completo;
