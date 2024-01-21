@@ -1,5 +1,5 @@
 # BitacoraDigital
-Software desarrollado de forma individual para cubrir mi estancia de servicio social (julio 2023 - enero 2024) en el Centro de Nanociencias y Micro y Nanotecnologías del IPN. Repositorio creado para tener un mejor control de versiones de la bitácora digital.
+Proyecto respaldado por MIT Licence. Para usar el proyecto, descargar la carpeta completa y ejecutar el archivo "bitacoraLaboratorio_XPS.bat". Si se desea saber el contenido de dicho arhcivo, abrir en bloc de notas.
 
 # ¿En qué consiste?
 De acuerdo a los requerimientos, está diseñado para que el servidor sea ejecutado de forma local, es decir, no tendrá acceso a internet. 
