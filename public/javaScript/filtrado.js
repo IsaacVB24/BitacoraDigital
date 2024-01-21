@@ -107,7 +107,7 @@ function filtrado() {
 
     const mesesSeleccionados = Array.from(checkboxesMeses).map(checkbox => parseInt(checkbox.value));
     const aniosSeleccionados = Array.from(checkboxesAnios).map(checkbox => parseInt(checkbox.value));
-    
+
     // Realiza una solicitud al servidor para obtener los registros filtrados
     fetch(`/filtrarRegistros?meses=${JSON.stringify(mesesSeleccionados)}&anios=${JSON.stringify(aniosSeleccionados)}`)
         .then(response => response.json())
@@ -160,4 +160,6 @@ function desactivarBotonEliminarFiltros(){
 function eliminarFiltros(){
     desactivarBotonEliminarFiltros();
     mostrarRegistros();
+    realizarBusqueda();
+    deseleccionarCheckboxes();
 }

@@ -76,6 +76,7 @@ function modificarFormulario() {
     validarSuperacionTamaño(ul_durAn, duracionAnalisisAModificar, input_durAn, duracionAnalisis_maximo);
     validarSuperacionTamaño(ul_xfti, xftiAModificar, input_xfti, xfti_maximo);
     validarSuperacionTamaño(ul_presCam, presionAModificar, input_presCam, presionCamara_maximo);
+    interaccionCamposDeLista();
   } else {
     console.error('No se encontró un idRegistro válido en localStorage.');
   }

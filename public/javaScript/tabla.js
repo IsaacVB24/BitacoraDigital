@@ -196,6 +196,7 @@ function deseleccionarCheckboxes(){
 
 // Función para realizar la búsqueda y mostrar los resultados en la tabla
 function realizarBusqueda() {
+    deseleccionarCheckboxes();
     const campoBusqueda = document.getElementById('ingresarTexto');
     const terminoBusqueda = campoBusqueda.value.trim().toLowerCase();
 

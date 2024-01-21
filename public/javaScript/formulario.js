@@ -191,22 +191,22 @@ function validarClaves() {
         arreglo_presion = presionAModificar;
     }
     if (arreglo_claves.length < 1) {
-        alert("Ingrese al menos una clave de muestra, asegúrese de dar clic en su correspondiente botón '+'.");
+        alert("Ingrese al menos una clave de muestra, asegúrese de dar clic en su correspondiente botón '+' o dar Enter.");
         clavMuesInput.focus(); // Establece el foco en el campo "clavMues"
         return false; // Evita el envío del formulario
     }
     if (arreglo_duracion.length < 2) {
-        alert("Ingrese al menos un valor de duración del análisis, asegúrese de dar clic en su correspondiente botón '+'.");
+        alert("Ingrese al menos un valor de duración del análisis, asegúrese de dar clic en su correspondiente botón '+' o dar Enter.");
         durAnInput.focus(); // Establece el foco en el campo "durAn"
         return false; // Evita el envío del formulario
     }
     if (arreglo_xfti.length < 1) {
-        alert("Ingrese al menos un valor de tiempo de vida de filamentos de rayos X, asegúrese de dar clic en su correspondiente botón '+'.");
+        alert("Ingrese al menos un valor de tiempo de vida de filamentos de rayos X, asegúrese de dar clic en su correspondiente botón '+' o dar Enter.");
         xftiInput.focus(); // Establece el foco en el campo "xfti"
         return false; // Evita el envío del formulario
     }
     if (arreglo_presion.length < 1) {
-        alert("Ingrese al menos un valor de presión en cámara de análisis, asegúrese de dar clic en su correspondiente botón '+'.");
+        alert("Ingrese al menos un valor de presión en cámara de análisis, asegúrese de dar clic en su correspondiente botón '+' o dar Enter.");
         presCamInput.focus(); // Establece el foco en el campo "presCam"
         return false; // Evita el envío del formulario
     }
@@ -221,41 +221,6 @@ function validarClaves() {
     return true; // Permite el envío del formulario
     //claveList.style.display = 'none'; // Oculta claveList cuando el input pierde el foco
 }
-/**
- 
-function clavesPierdeFocus() {
-    if(rutaActual === "/crearRegistro"){
-        arreglo = clavesMuestra;
-    } else if(rutaActual === "/modificarRegistro"){
-        arreglo = clavesAModificar;
-    }
-    const inputs = document.querySelectorAll('input'); // Obtener todos los inputs
-
-    const clavMuesInput = document.getElementById('clavMues');
-    const claveList = document.getElementById('claveList');
-
-    clavMuesInput.addEventListener('blur', function () {
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-              if (input.id !== 'clavMues') {
-                // Este input tiene foco y no es el input con id "in2"
-                clavMuesInput.value = arreglo;
-                claveList.style.display = 'none'; // Oculta claveList cuando el input pierde el foco
-              }
-            });
-          });
-    });
-
-    clavMuesInput.addEventListener('focus', function () {
-        clavMuesInput.value = '';
-        if (arreglo.length > 0) {
-            claveList.style.display = 'block'; // Muestra claveList si hay elementos en el arreglo
-        } else {
-            claveList.style.display = 'none'; // Oculta claveList si el arreglo está vacío
-        }
-    });
-}
- */
 
 function crearFormulario() {
     document.getElementById('formulario').innerHTML = '<form action="/crearRegistro" method="POST" onsubmit="return validarClaves()">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Crear nuevo registro</button></form>';
@@ -266,6 +231,7 @@ function crearFormulario() {
     //document.getElementById("claveList").style.display = "none";
     //clavesPierdeFocus();
     validarFormatoTiempo();
+    interaccionCamposDeLista();
 }
 
 function asignarFuncion_botonMas(id, arreglo, numeroMaximoDeElementos, numeroCols){
@@ -277,11 +243,6 @@ function asignarFuncion_botonMas(id, arreglo, numeroMaximoDeElementos, numeroCol
     };
     inputObjetivo.required = true;
 }
-
-// Variables a usar: nomUs, numSol, clavMues, fuenEmpl, durAn, xfti, presCam, observaciones
-// {"registro":{"id":2,"nombre_usuario":"2019630552-IsaacVB.-","num_solicitud":"Solicitud 1 + Solicitud2, detalles","clave_muestra":"Claves sin extensión","fuentes_empleadas":"Fuentes empleadas","duracion_analisis":"58:01","tiempo_vida_filamentos":"00:24","presion_camara_analisis":1000,"observaciones":"","fecha":"31/08/2023"}}
-
-//<div id='fila4' class='filas'><div><label for='diamHaz'>Diámetro del haz de Rayos X [micras^2]:</label><input type='text' name='diamHaz' id='diamHaz' placeholder='Diámetro en micras^2' required maxlength='10'></div><div><label for='precamara'>Precámara [horas]:</label><input type='text' name='precamara' id='precamara' placeholder='Precámara en horas' required maxlength='7'></div><div><label for='camAnalisis'>Cámara de análisis [horas]:</label><input type='text' name='camAnalisis' id='camAnalisis' placeholder='Cámara de análisis en horas' required maxlength='7'></div></div>"
 
 function cargarDatos() {
     // Recuperar datos del localStorage
@@ -392,6 +353,104 @@ function validarFormatoTiempo() {
             xfti.value = ''; // Limpia el campo
             document.getElementById('version').click(); // Simula un clic fuera de las etiquetas input para que no haya un bug en mostrar un mensaje de error si el formato de tiempo no es válido
             xfti.focus();
+        }
+    });
+}
+
+// La siguiente función permite que haya una mejor UX, ya que, al dar clic en el botón tabulador cuando el usuario se encuentre en un input que maneje listas, se le dirigirá al siguiente input. Si da clic en Enter, se añadirá lo escrito a su lista correspondiente.
+function interaccionCamposDeLista() {
+    const listas = document.querySelectorAll('ul');
+    const ids_inputListas = [];
+
+    listas.forEach(lista => {
+        const inputsNodeList = lista.parentElement.querySelectorAll('input');
+        const inputsArray = Array.from(inputsNodeList);
+
+        inputsArray.forEach(input => {
+            ids_inputListas.push(input.id);
+        });
+
+        inputsArray.forEach(input => {
+            const indiceInput = ids_inputListas.indexOf(input.id);
+            input.addEventListener('keydown', (event) => {
+                if(event.key === 'Tab' && !event.shiftKey){
+                    event.preventDefault();
+                    if(indiceInput != (ids_inputListas.length - 1)){
+                        const siguienteIndice = indiceInput + 1;
+                        nombreSiguienteInput = ids_inputListas[siguienteIndice];
+                        document.getElementById(nombreSiguienteInput).focus();
+                    }else{
+                        document.getElementById('observaciones').focus();
+                    }
+                }else if(event.key === 'Tab' && event.shiftKey){
+                    event.preventDefault();
+                    if (indiceInput > 0) {
+                        const anteriorIndice = indiceInput - 1;
+                        const nombreAnteriorInput = ids_inputListas[anteriorIndice];
+                        document.getElementById(nombreAnteriorInput).focus();
+                    }else{
+                        document.getElementById('fuenEmpl').focus();
+                    }
+                }
+                if(event.key === 'Enter'){
+                    let botonMas;
+                    event.preventDefault();
+                    if(input.id === ids_inputListas[0]) botonMas = document.getElementById(claves_idBotonMas);
+                    if(input.id === ids_inputListas[1]){
+                        botonMas = document.getElementById(duracionAnalisis_idBotonMas);
+                        const formatoDurAn = er_durAr;
+                        const duracionAnalisis = document.getElementById(durAn_idInput);
+                        const valor = duracionAnalisis.value.trim();
+                        if (!formatoDurAn.test(valor) && duracionAnalisis.value != '') {
+                            alert('Formato no válido para duración del análisis. Por favor, ingrese un tiempo válido en el formato HH:MM.\nValor máximo = 999:59\nValor mínimo: 0:01');
+                            duracionAnalisis.value = ''; // Limpia el campo
+                            document.getElementById('version').click(); // Simula un clic fuera de las etiquetas input para que no haya un bug en mostrar un mensaje de error si el formato de tiempo no es válido
+                            duracionAnalisis.focus();
+                        }
+                    }
+                    if(input.id === ids_inputListas[2]){
+                        botonMas = document.getElementById(xfti_idBotonMas);
+                        const formatoValido = er_xfti;
+                        const xfti = document.getElementById(xfti_idInput);
+                        const valor = xfti.value.trim();
+                        if (!formatoValido.test(valor) && xfti.value != '') {
+                            alert('Formato no válido para XFTI. Por favor, ingrese un tiempo válido en el formato HH:MM.\nValor máximo = 9999:59\nValor mínimo: 0:01');
+                            xfti.value = ''; // Limpia el campo
+                            document.getElementById('version').click(); // Simula un clic fuera de las etiquetas input para que no haya un bug en mostrar un mensaje de error si el formato de tiempo no es válido
+                            xfti.focus();
+                        }
+                    }
+                    if(input.id === ids_inputListas[3]) botonMas = document.getElementById(presionCamara_idBotonMas);
+                    botonMas.click();
+                }
+            });
+        });
+    });
+    const botonesFormulario = document.querySelectorAll('button');
+    const botonesArray = Array.from(botonesFormulario);
+    const tamArregloBotones = botonesArray.length;
+    document.getElementById('diamHaz').addEventListener('keydown', event => {
+        if(event.key === 'Enter'){
+            event.preventDefault();
+            botonesArray[tamArregloBotones-1].click();  // Clic en el botón para crear o modificar registro
+        }
+    });
+    document.getElementById('precamara').addEventListener('keydown', event => {
+        if(event.key === 'Enter'){
+            event.preventDefault();
+            botonesArray[tamArregloBotones-1].click();
+        }
+    });
+    document.getElementById('camAnalisis').addEventListener('keydown', event => {
+        if(event.key === 'Enter'){
+            event.preventDefault();
+            botonesArray[tamArregloBotones-1].click();
+        }
+    });
+    document.getElementById('observaciones').addEventListener('keydown', (event) => {
+        if(event.key === 'Tab' && event.shiftKey){
+            event.preventDefault();
+            document.getElementById('presCam').focus();
         }
     });
 }

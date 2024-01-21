@@ -9,6 +9,7 @@ const dbPath = path.join(__dirname, 'baseDeDatos', '_registrosBitacora.db');
 const respaldosPath = path.join(__dirname, 'baseDeDatos', 'respaldos');
 
 // Programar la tarea para ejecutarse el respaldo los primeros lunes de cada mes a las 10am
+// Añadir viernes a las 10am
 cron.schedule('0 10 * * 1-7', async () => {
     console.log('-----------------------------------------------------\nIniciando respaldo...');
 

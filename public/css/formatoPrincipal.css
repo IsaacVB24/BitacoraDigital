@@ -305,3 +305,6 @@ button.fin{
 .contenedorOpcion label:hover{
     cursor: pointer;
 }
+.filtro-group p{
+    text-decoration: underline;
+}
