@@ -223,13 +223,11 @@ function validarClaves() {
 }
 
 function crearFormulario() {
-    document.getElementById('formulario').innerHTML = '<form action="/crearRegistro" method="POST" onsubmit="return validarClaves()">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Crear nuevo registro</button></form>';
+    document.getElementById('formulario').innerHTML = '<form id="formCrear" action="/crearRegistro" method="POST" onsubmit="return validarClaves()">' + estrucForm + '<button class="btn-registros" id="btn-crearR" type="submit">Crear nuevo registro</button></form>';
     asignarFuncion_botonMas(claves_idBotonMas, clavesMuestra, clavesMuestra_maximo, columnasClaves);
     asignarFuncion_botonMas(duracionAnalisis_idBotonMas, duracionAnalisis, duracionAnalisis_maximo+1, columnasDurAn);
     asignarFuncion_botonMas(xfti_idBotonMas, xfti, xfti_maximo, columnasXFTI);
     asignarFuncion_botonMas(presionCamara_idBotonMas, presionCamara, presionCamara_maximo, columnasPresCam);
-    //document.getElementById("claveList").style.display = "none";
-    //clavesPierdeFocus();
     validarFormatoTiempo();
     interaccionCamposDeLista();
 }
@@ -453,4 +451,74 @@ function interaccionCamposDeLista() {
             document.getElementById('presCam').focus();
         }
     });
+}
+
+const mensajeSalida = '¿Realmente desea salir? \nAl confirmar, se perderán los datos modificados.';
+function volver(){
+    const inputs = document.querySelectorAll('input');
+    const inputsArray = Array.from(inputs);
+    let inputsVacios = true; // Por default, suponemos que están vacíos todos los inputs
+    if(rutaActual === '/crearRegistro'){
+        inputsArray.forEach(campo => {
+            if(campo.value !== '') inputsVacios = false;
+        });
+        // Si inputsVacios = false, significa que al menos uno de ellos tiene datos
+        if(!inputsVacios){
+            const confirmacion = window.confirm(mensajeSalida);
+            if(confirmacion == true) redirigirPantallaPrincipal();
+        } else{
+            redirigirPantallaPrincipal();
+        }
+    }else if(rutaActual === '/modificarRegistro'){
+        const datos = JSON.parse(localStorage.getItem('registroSeleccionado'));
+        const jsonDatos = datos.registro;
+        let registrosIguales = true;    // Suponer que, por default, todos los inputs no fueron modificados
+        const num_solicitud = document.getElementById('numSol').value;
+        const nombre_usuario = document.getElementById('nomUs').value;
+        const fuentes_empleadas = document.getElementById('fuenEmpl').value;
+        const clave_muestra = recuperrarArregloDeLista('claveList');
+        const duracion_analisis = recuperrarArregloDeLista('duracionList');
+        const tiempo_vida_filamentos = recuperrarArregloDeLista('xfti_list');
+        const presion_camara_analisis = recuperrarArregloDeLista('presionCamara_list');
+        const observaciones = document.getElementById('observaciones').value;
+        const diametro_haz = document.getElementById('diamHaz').value;
+        const precamara = document.getElementById('precamara').value;
+        const camara = document.getElementById('camAnalisis').value;
+
+        if(jsonDatos.num_solicitud !== num_solicitud) registrosIguales = false;
+        if(jsonDatos.nombre_usuario !== nombre_usuario) registrosIguales = false;
+        if(jsonDatos.fuentes_empleadas !== fuentes_empleadas) registrosIguales = false;
+        if(jsonDatos.clave_muestra !== clave_muestra) registrosIguales = false;
+        if(jsonDatos.duracion_analisis !== duracion_analisis) registrosIguales = false;
+        if(jsonDatos.tiempo_vida_filamentos !== tiempo_vida_filamentos) registrosIguales = false;
+        if(jsonDatos.presion_camara_analisis !== presion_camara_analisis) registrosIguales = false;
+        if(jsonDatos.observaciones !== observaciones) registrosIguales = false;
+        if(jsonDatos.diametro_haz !== diametro_haz) registrosIguales = false;
+        if(jsonDatos.precamara !== precamara) registrosIguales = false;
+        if(jsonDatos.camara !== camara) registrosIguales = false;
+        
+        if(registrosIguales){
+            redirigirPantallaPrincipal();
+        }else{
+            const confirmacion = window.confirm(mensajeSalida);
+            if(confirmacion == true) redirigirPantallaPrincipal();
+        }
+    }
+}
+
+function redirigirPantallaPrincipal(){
+    window.location.href = 'http://localhost:3000/';
+}
+
+function recuperrarArregloDeLista(idListaUL){
+    const ul_clave = document.getElementById(idListaUL);
+    const li_clave = ul_clave.querySelectorAll('li');
+    const arreglo = [];
+    // if(idListaUL === 'xfti_list') arreglo.push('00:00');
+    li_clave.forEach(elementoLi => {
+        const elementoP = elementoLi.querySelector('p');
+        arreglo.push(elementoP.textContent);
+    });
+    const arregloConvertido = arreglo.join(',');
+    return arregloConvertido;
 }
