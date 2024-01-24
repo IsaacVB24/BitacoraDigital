@@ -308,3 +308,28 @@ button.fin{
 .filtro-group p{
     text-decoration: underline;
 }
+#btn-off{
+    position: fixed;
+    top: 10px; /* Ajusta según tu diseño */
+    right: 10px; /* Ajusta según tu diseño */
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+    height: 40px;
+    margin-right: 10px;
+}
+#btn-off:hover{
+    cursor: pointer;
+    height: 45px;
+    transition-duration: .5s;
+}
+#tooltip {
+    position: absolute;
+    display: none;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    pointer-events: none; /* Evitar interferencia con eventos del tooltip */
+    z-index: 9999; /* Asegurar que esté por encima de otros elementos */
+    font-family: 'Montserrat', sans-serif;
+    font-size: medium;
+}

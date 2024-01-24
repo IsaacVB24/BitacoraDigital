@@ -1,0 +1,19 @@
+button:hover{
+    cursor: pointer;
+}
+/* Estilos para el contenedor contenidoOff */
+.contenidoOff {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    height: 100%; /* Ajusta el contenedor al 100% del alto del contenedor padre */
+    font-size: xx-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+h1, h2, button{
+    font-size: 3vh;
+}
+button{
+    padding: 5px;
+}
