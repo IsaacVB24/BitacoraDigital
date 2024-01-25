@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 const baseDeDatos = require('./baseDeDatos'); // Importa el módulo baseDeDatos.js
+const { exec } = require('child_process');
 
 // Página principal
 router.get('/', (req, res) => {
@@ -249,6 +250,22 @@ router.get('/filtrarRegistros', (req, res) => {
         } else {
             res.json(rows); // Devuelve los resultados del filtrado en formato JSON
         }
+    });
+});
+
+router.get('/apagarServidor', (req, res) => {
+    
+    const nombreProceso = 'MiServidor';
+
+    // Ejecuta el comando pm2 stop MiServidor sin abrir una ventana de comandos
+    exec(`start /B pm2 stop ${nombreProceso}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error al detener el proceso ${nombreProceso}: ${error}`);
+            return res.status(500).json({ error: 'Error al detener el servidor' });
+        }
+
+        console.log(`Proceso ${nombreProceso} detenido con éxito.`);
+        // Puedes manejar la respuesta si es necesario
     });
 });
 
