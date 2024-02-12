@@ -75,7 +75,7 @@ function mostrarLista(arreglo, listaUl, numeroColumnas){
         const elementoLi = document.createElement("li");
         const span = document.createElement("span");
         const parrafo = document.createElement("p");
-        parrafo.style.width = '15ch';
+        arreglo === presionCamara ? parrafo.style.width = '11ch' : parrafo.style.width = '10ch';
         parrafo.textContent = arreglo[i];
         if(arreglo !== duracionAnalisis){
             span.innerHTML = (i+1)+') ';

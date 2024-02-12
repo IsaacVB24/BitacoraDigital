@@ -7,7 +7,7 @@ REM Ejecutar el servidor Node.js en segundo plano con pm2
 pm2 start servidor.js --name MiServidor
 
 REM Esperar unos segundos para asegurarse de que el servidor esté en funcionamiento
-timeout /t 2
+timeout /t 5
 
 echo Servidor iniciado y navegador abierto.
 

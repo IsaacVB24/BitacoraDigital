@@ -35,14 +35,15 @@ button{
 #formulario{
     height: 70%;
     margin: 10px 0px;
-    padding: 10px;
+    padding: 0px;
+    width: 100%;
 }
 label, input, textarea, li, li button, span{
     font-size: medium;
 }
 ul{
     border-radius: 5px;
-    margin: 0px 5px;
+    margin: 0px 0px;
     list-style-type: none;
 }
 /* Ajusta el contenido de los elementos de la lista en un solo renglón */
@@ -88,9 +89,18 @@ ul li button {
 #fila2, #fila4{
     justify-content: space-between; /* Esto centrará horizontalmente los divs y distribuirá el espacio entre ellos */
 }
-#fila2 input, #fila4 input{
+#fila2 input:not(#durAn, #xfti), #fila4 input{
     width: 25ch;
 }
+#duran, #xfti{
+    width: 20ch;
+}
+#divDurAn, #divXFTI, #divPresCam{
+    padding-left: 4px;
+    padding-right: 4px;
+    border-left: 1px solid black;
+}
+/* Implementar líneas entre fila 2*/
 #fila3{
     flex-direction: column;
     height: calc(20% + 5px);
@@ -110,14 +120,14 @@ ul li button {
 }
 */
 #fila2 div{
+    width: 100ch;
+}
+#claveList{
+    margin-left: 40px;
+}
+#fila2 div:not(#divClavMues){
     width: 100%;
     margin: 0;
-}
-#divDurAn{
-    margin-right: 0;
-}
-#divXFTI{
-    margin-left: 0;
 }
 .filas{
     display: flex;
@@ -125,7 +135,7 @@ ul li button {
     text-align: center;
 }
 .filas div{
-    margin: 0px 25px;
+    margin: 0px 0px;
 }
 .filas div input{
     margin-left: 10px;
@@ -138,4 +148,7 @@ ul li button {
     height: 30px; /* Iguala la altura al input. */
     border-radius: 50px;
     background-color: #48ce6a;
+}
+#infoFormulario{
+    margin-top: 30px;
 }

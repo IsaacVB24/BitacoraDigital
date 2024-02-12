@@ -185,23 +185,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnOff = document.getElementById('btn-off');
     const tooltip = document.getElementById('tooltip');
 
-    btnOff.addEventListener('mouseover', () => {
-        // Mostrar tooltip cuando el cursor está sobre la imagen
-        tooltip.style.display = 'block';
-    });
-
-    btnOff.addEventListener('mouseout', () => {
-        // Ocultar tooltip cuando el cursor sale de la imagen
-        tooltip.style.display = 'none';
-    });
-
-    document.addEventListener('mousemove', (event) => {
-        // Actualizar posición del tooltip solo si el cursor está sobre la imagen
-        if (event.target === btnOff) {
-            tooltip.style.left = (event.pageX - tooltip.offsetWidth - 10) + 'px';
-            tooltip.style.top = (event.pageY + 10) + 'px';
-        }
-    });
+    if(rutaActual === '/'){
+        btnOff.addEventListener('mouseover', () => {
+            // Mostrar tooltip cuando el cursor está sobre la imagen
+            tooltip.style.display = 'block';
+        });
+    
+        btnOff.addEventListener('mouseout', () => {
+            // Ocultar tooltip cuando el cursor sale de la imagen
+            tooltip.style.display = 'none';
+        });
+    
+        document.addEventListener('mousemove', (event) => {
+            // Actualizar posición del tooltip solo si el cursor está sobre la imagen
+            if (event.target === btnOff) {
+                tooltip.style.left = (event.pageX - tooltip.offsetWidth - 10) + 'px';
+                tooltip.style.top = (event.pageY + 10) + 'px';
+            }
+        });
+    }
 });
 
 function deseleccionarCheckboxes(){
