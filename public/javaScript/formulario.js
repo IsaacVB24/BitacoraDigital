@@ -66,32 +66,26 @@ function botonMas(arreglo, id, numeroMaximoDeElementos, numeroColumnas) {
     input.focus();
 }
 
-function mostrarLista(arreglo, listaUl, numeroColumnas){
+function mostrarLista(arreglo, listaUl, numeroColumnas) {
     listaUl.innerHTML = '';
     listaUl.style.columnCount = numeroColumnas;
     listaUl.style.display = 'block';
     listaUl.style.flexWrap = 'wrap';
-    for(let i=0; i<arreglo.length; i++){
+
+    const elementosPorColumna = Math.ceil(arreglo.length / numeroColumnas);
+    for (let i = 0; i < arreglo.length; i++) {
         const elementoLi = document.createElement("li");
         const span = document.createElement("span");
         const parrafo = document.createElement("p");
         arreglo === presionCamara ? parrafo.style.width = '11ch' : parrafo.style.width = '10ch';
         parrafo.textContent = arreglo[i];
-        if(arreglo !== duracionAnalisis){
-            span.innerHTML = (i+1)+') ';
-        } else{
-            if(!(arreglo[i] === '00:00')){
-                span.innerHTML = i + ') ';
-            }
-        }
+        span.innerHTML = (i + 1) + ') ';
         elementoLi.appendChild(span);
         elementoLi.appendChild(parrafo);
-        listaUl.style.position = "block";
-        elementoLi.style.position = "block";
 
         const botonModificar = document.createElement('button');
         botonModificar.textContent = "M";
-        botonModificar.addEventListener('click', function (event){
+        botonModificar.addEventListener('click', function (event) {
             event.preventDefault();
             modificarElemento(arreglo, i, parrafo, event);
         });
@@ -102,16 +96,18 @@ function mostrarLista(arreglo, listaUl, numeroColumnas){
             eliminarElemento(arreglo, i, elementoLi, listaUl, numeroColumnas);
         });
 
-        if(!(arreglo[i] === '00:00')){
+        if (!(arreglo[i] === '00:00')) {
             elementoLi.appendChild(botonModificar);
             elementoLi.appendChild(botonEliminar);
         }
         listaUl.appendChild(elementoLi);
+
         // Ajusta la posición vertical de los elementos nuevos
-        const newElementPosition = listaUl.childElementCount * 20 + 'px';
+        const newElementPosition = (i % elementosPorColumna) * 20 + 'px';
         elementoLi.style.top = newElementPosition;
     }
 }
+
 
 function modificarElemento(arreglo, indice, parrafo, event){
     const nuevoContenido = prompt('Ingrese el nuevo contenido:', parrafo.textContent);
@@ -230,6 +226,23 @@ function crearFormulario() {
     asignarFuncion_botonMas(presionCamara_idBotonMas, presionCamara, presionCamara_maximo, columnasPresCam);
     validarFormatoTiempo();
     interaccionCamposDeLista();
+    const inputDurAn = document.getElementById(durAn_idInput);
+    const inputXFTI = document.getElementById(xfti_idInput);
+
+    inputDurAn.addEventListener('keydown', espacio);
+    inputXFTI.addEventListener('keydown', espacio);
+}
+
+function espacio(event) {
+    const keyCode = event.keyCode || event.which;
+    if (keyCode === 32) {
+        event.preventDefault();
+        const contenidoActualInput = this.value.trim();
+        if (!contenidoActualInput.includes(':')) {
+            event.preventDefault();
+            this.value = contenidoActualInput + ':';
+        }
+    }
 }
 
 function asignarFuncion_botonMas(id, arreglo, numeroMaximoDeElementos, numeroCols){

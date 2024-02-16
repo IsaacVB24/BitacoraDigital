@@ -1,4 +1,3 @@
-// tabla.js
 const rutaActual = window.location.pathname;
 
 function eliminar() {

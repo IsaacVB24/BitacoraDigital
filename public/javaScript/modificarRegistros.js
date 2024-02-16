@@ -77,6 +77,12 @@ function modificarFormulario() {
     validarSuperacionTamaño(ul_xfti, xftiAModificar, input_xfti, xfti_maximo);
     validarSuperacionTamaño(ul_presCam, presionAModificar, input_presCam, presionCamara_maximo);
     interaccionCamposDeLista();
+
+    const inputDurAn = document.getElementById(durAn_idInput);
+    const inputXFTI = document.getElementById(xfti_idInput);
+
+    inputDurAn.addEventListener('keydown', espacio);
+    inputXFTI.addEventListener('keydown', espacio);
   } else {
     console.error('No se encontró un idRegistro válido en localStorage.');
   }
