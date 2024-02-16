@@ -228,9 +228,13 @@ function crearFormulario() {
     interaccionCamposDeLista();
     const inputDurAn = document.getElementById(durAn_idInput);
     const inputXFTI = document.getElementById(xfti_idInput);
+    const inputPrecamara = document.getElementById('precamara');
+    const inputCamara = document.getElementById('camAnalisis');
 
     inputDurAn.addEventListener('keydown', espacio);
     inputXFTI.addEventListener('keydown', espacio);
+    inputPrecamara.addEventListener('keydown', espacio);
+    inputCamara.addEventListener('keydown', espacio);
 }
 
 function espacio(event) {
