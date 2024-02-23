@@ -82,11 +82,29 @@ function modificarFormulario() {
     const inputXFTI = document.getElementById(xfti_idInput);
     const inputPrecamara = document.getElementById('precamara');
     const inputCamara = document.getElementById('camAnalisis');
+    const inputNumSol = document.getElementById('numSol');
+    const inputNomUs = document.getElementById('nomUs');
+    const inputFuenEmpl = document.getElementById('fuenEmpl');
+    const inputDiamHaz = document.getElementById('diamHaz');
+    const arregloInputs = [];
+    arregloInputs.push(inputPrecamara, inputCamara, inputNumSol, inputNomUs, inputFuenEmpl, inputDiamHaz);
+    arregloInputs.forEach(input => {
+        input.addEventListener('keydown', function (event) {
+            if(event.key === 'Enter'){
+                event.preventDefault();
+                document.getElementById('btn-crearR').click();
+            }
+        });
+    });
 
     inputDurAn.addEventListener('keydown', espacio);
     inputXFTI.addEventListener('keydown', espacio);
     inputPrecamara.addEventListener('keydown', espacio);
     inputCamara.addEventListener('keydown', espacio);
+    const elementosPClaves = document.querySelectorAll('#claveList p');
+    elementosPClaves.forEach(elemento => {
+        elemento.style.width = '30ch';
+    });
   } else {
     console.error('No se encontró un idRegistro válido en localStorage.');
   }

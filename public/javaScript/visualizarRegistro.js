@@ -62,4 +62,8 @@ function visFormulario() {
     // document.getElementById("clavMues").style.width = "100%";
     agregarFecha();
     cargarDatos();
+    const elementosPClaves = document.querySelectorAll('#claveList p');
+    elementosPClaves.forEach(elemento => {
+        elemento.style.width = '30ch';
+    });
 }

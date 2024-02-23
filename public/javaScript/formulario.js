@@ -12,8 +12,8 @@ const presCam_idInput = "presCam";
 
 // Cantidad de columnas para cada campo de entrada de la fila 2
 const columnasClaves = 1;
-const columnasDurAn = 3;
-const columnasXFTI = columnasDurAn;
+const columnasDurAn = 2;
+const columnasXFTI = 3;
 const columnasPresCam = 3;
 // console.log(columnasClaves, columnasDurAn, columnasXFTI, columnasPresCam);
 
@@ -25,7 +25,7 @@ const er_durAr = /^(\d{1,3}):([0-5][0-9])$/;
 const er_xfti = /^(\d{1,4}):([0-5][0-9])$/;
 
 //Tiempo de vida de filamentos de rayos X (XFTI) [horas]:
-const estrucForm = "<div id='fila1' class='filas'><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required maxlength='15' autocomplete='off'></div><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='100' placeholder='Ingrese nombre de usuario' required></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required maxlength='50'></div></div><div id='fila2' class='filas'><div id='divClavMues'><label for='" + claves_idInput + "'>Claves de muestra:</label><input type='text' name='" + claves_idInput + "' id='" + claves_idInput + "' maxlength='15' placeholder='" + claves_placeholder + "' autocomplete='off'><button class='botonMas' id='" + claves_idBotonMas + "' type='button'>+</button><ul id='claveList' style='column-count:" + columnasClaves + "'></ul></div><div id='divDurAn'><label for='" + durAn_idInput + "'>Duración del análisis [horas]:</label><input type='text' name='" + durAn_idInput + "' id='" + durAn_idInput + "' placeholder='" + tiempo_placeholder + "' maxlength='6' autocomplete='off'><button class='botonMas' id='" + duracionAnalisis_idBotonMas + "' type='button'>+</button><ul id='duracionList' style='column-count:" + columnasDurAn + "'></ul></div><div id='divXFTI'><label for='" + xfti_idInput + "'>XFTI [horas]:</label><input type='text' name='" + xfti_idInput + "' id='" + xfti_idInput + "' placeholder='" + tiempo_placeholder + "' maxlength='7' autocomplete='off'><button class='botonMas' id='" + xfti_idBotonMas + "' type='button'>+</button><ul id='xfti_list' style='column-count:" + columnasXFTI + "'></ul></div><div id='divPresCam'><label for='" + presCam_idInput + "'>Presión en cámara de análisis [mbar]:</label><input type='text' name='" + presCam_idInput + "' id='" + presCam_idInput + "' placeholder='" + presionCamara_placeholder + "' maxlength='10' autocomplete='off'><button class='botonMas' id='" + presionCamara_idBotonMas + "' type='button'>+</button><ul id='presionCamara_list' style='column-count:" + columnasPresCam + "'></ul></div></div><div id='fila3' class='filas'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.' maxlength='600'></textarea></div><div id='fila4' class='filas'><div><label for='diamHaz'>Diámetro del haz de Rayos X [micras^2]:</label><input type='text' name='diamHaz' id='diamHaz' placeholder='Diámetro en micras^2' required maxlength='10'></div><div><label for='precamara'>Precámara [horas]:</label><input type='text' name='precamara' id='precamara' placeholder='Precámara en horas' required maxlength='7'></div><div><label for='camAnalisis'>Cámara de análisis [horas]:</label><input type='text' name='camAnalisis' id='camAnalisis' placeholder='Cámara de análisis en horas' required maxlength='7'></div></div>";
+const estrucForm = "<div id='fila1' class='filas'><div><label for='numSol'>Número de solicitud:</label><input type='text' name='numSol' id='numSol' placeholder='Ingrese número de solicitud' required maxlength='15' autocomplete='off'></div><div><label for='nomUs'>Nombre de usuario:</label><input type='text' name='nomUs' id='nomUs' maxlength='100' placeholder='Ingrese nombre de usuario' required></div><div><label for='fuenEmpl'>Fuentes empleadas:</label><input type='text' name='fuenEmpl' id='fuenEmpl' placeholder='Ingrese las fuentes empleadas' required maxlength='50'></div></div><div id='fila2' class='filas'><div id='divClavMues'><label for='" + claves_idInput + "'>Claves de muestra:</label><input type='text' name='" + claves_idInput + "' id='" + claves_idInput + "' maxlength='30' placeholder='" + claves_placeholder + "' autocomplete='off'><button class='botonMas' id='" + claves_idBotonMas + "' type='button'>+</button><ul id='claveList' style='column-count:" + columnasClaves + "'></ul></div><div id='divDurAn'><label for='" + durAn_idInput + "'>Duración del análisis [horas]:</label><input type='text' name='" + durAn_idInput + "' id='" + durAn_idInput + "' placeholder='" + tiempo_placeholder + "' maxlength='6' autocomplete='off'><button class='botonMas' id='" + duracionAnalisis_idBotonMas + "' type='button'>+</button><ul id='duracionList' style='column-count:" + columnasDurAn + "'></ul></div><div id='divXFTI'><label for='" + xfti_idInput + "'>XFTI [horas]:</label><input type='text' name='" + xfti_idInput + "' id='" + xfti_idInput + "' placeholder='" + tiempo_placeholder + "' maxlength='7' autocomplete='off'><button class='botonMas' id='" + xfti_idBotonMas + "' type='button'>+</button><ul id='xfti_list' style='column-count:" + columnasXFTI + "'></ul></div><div id='divPresCam'><label for='" + presCam_idInput + "'>Presión en cámara de análisis [mbar]:</label><input type='text' name='" + presCam_idInput + "' id='" + presCam_idInput + "' placeholder='" + presionCamara_placeholder + "' maxlength='10' autocomplete='off'><button class='botonMas' id='" + presionCamara_idBotonMas + "' type='button'>+</button><ul id='presionCamara_list' style='column-count:" + columnasPresCam + "'></ul></div></div><div id='fila3' class='filas'><label for='observaciones'>Observaciones y/o eventos:</label><textarea name='observaciones' id='observaciones' cols='30' rows='5' placeholder='En caso de haber comentarios, colocarlos aquí.' maxlength='600'></textarea></div><div id='fila4' class='filas'><div><label for='diamHaz'>Diámetro del haz de Rayos X [micras^2]:</label><input type='text' name='diamHaz' id='diamHaz' placeholder='Diámetro en micras^2' required maxlength='10'></div><div><label for='precamara'>Precámara [horas]:</label><input type='text' name='precamara' id='precamara' placeholder='Precámara en horas' required maxlength='7'></div><div><label for='camAnalisis'>Cámara de análisis [horas]:</label><input type='text' name='camAnalisis' id='camAnalisis' placeholder='Cámara de análisis en horas' required maxlength='7'></div></div>";
 
 const estrucFecha = '<p>Fecha:&nbsp</p><p id="obtenerFecha">';
 
@@ -78,6 +78,7 @@ function mostrarLista(arreglo, listaUl, numeroColumnas) {
         const span = document.createElement("span");
         const parrafo = document.createElement("p");
         arreglo === presionCamara ? parrafo.style.width = '11ch' : parrafo.style.width = '10ch';
+        if(arreglo === clavesMuestra) parrafo.style.width = '30ch';
         parrafo.textContent = arreglo[i];
         span.innerHTML = (i + 1) + ') ';
         elementoLi.appendChild(span);
@@ -230,6 +231,20 @@ function crearFormulario() {
     const inputXFTI = document.getElementById(xfti_idInput);
     const inputPrecamara = document.getElementById('precamara');
     const inputCamara = document.getElementById('camAnalisis');
+    const inputNumSol = document.getElementById('numSol');
+    const inputNomUs = document.getElementById('nomUs');
+    const inputFuenEmpl = document.getElementById('fuenEmpl');
+    const inputDiamHaz = document.getElementById('diamHaz');
+    const arregloInputs = [];
+    arregloInputs.push(inputPrecamara, inputCamara, inputNumSol, inputNomUs, inputFuenEmpl, inputDiamHaz);
+    arregloInputs.forEach(input => {
+        input.addEventListener('keydown', function (event) {
+            if(event.key === 'Enter'){
+                event.preventDefault();
+                document.getElementById('btn-crearR').click();
+            }
+        });
+    });
 
     inputDurAn.addEventListener('keydown', espacio);
     inputXFTI.addEventListener('keydown', espacio);

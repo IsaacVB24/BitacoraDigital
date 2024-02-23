@@ -152,3 +152,12 @@ ul li button {
 #infoFormulario{
     margin-top: 30px;
 }
+#claveList li{
+    width: 45ch;
+}
+#divDurAn{
+    width: 30ch;
+}
+#claveList p{
+    width: 30ch;
+}
