@@ -20,7 +20,7 @@ db.serialize(() => {
     'fecha TEXT,' +
     'diametro_haz TEXT,' +
     'precamara TEXT,' +
-    'camara TEXT)');
+    'camara TEXT)'); 
 });
 
 // Función para guardar un nuevo registro en la base de datos
